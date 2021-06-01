@@ -6,7 +6,7 @@
 		"serve": "vite preview",
 		"pretty-quick": "pretty-quick --staged --ignore-path .gitignore",
 		"lint": "eslint \"src/**/*.{vue,ts,tsx}\"",
-		"lint:lint-staged": "lint-staged -c ./.husky/lintstagedrc.js"
+		"unusable": "lint-staged -c ./.husky/lintstagedrc.js"
 	},
 	"dependencies": {
 		"vue": "^3.0.5"
