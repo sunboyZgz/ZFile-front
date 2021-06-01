@@ -1,0 +1,17 @@
+/dist
+
+*.html
+
+*.json
+
+*.css
+
+*.md
+
+/.husky
+
+/node_modules
+
+public
+
+10

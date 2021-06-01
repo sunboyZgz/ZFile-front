@@ -1,0 +1,33 @@
+{
+	"version": "0.0.0",
+	"scripts": {
+		"dev": "vite",
+		"build": "vue-tsc --noEmit && vite build",
+		"serve": "vite preview",
+		"pretty-quick": "pretty-quick --staged --ignore-path .gitignore",
+		"lint": "eslint \"src/**/*.{vue,ts,tsx}\"",
+		"lint:lint-staged": "lint-staged -c ./.husky/lintstagedrc.js"
+	},
+	"dependencies": {
+		"vue": "^3.0.5"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^4.26.0",
+		"@typescript-eslint/parser": "^4.26.0",
+		"@vitejs/plugin-vue": "^1.2.3",
+		"@vue/compiler-sfc": "^3.0.5",
+		"eslint": "^7.27.0",
+		"eslint-plugin-vue": "^7.10.0",
+		"husky": "^6.0.0",
+		"lint-staged": "^11.0.0",
+		"prettier": "2.3.0",
+		"pretty-quick": "^3.1.0",
+		"typescript": "^4.1.3",
+		"vite": "^2.3.5",
+		"vue-tsc": "^0.0.24"
+	},
+	"lint-staged": {
+		"*.js": "eslint --cache --fix",
+		"*.{js,css,md}": "prettier --write"
+	}
+}
