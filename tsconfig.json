@@ -3,13 +3,21 @@
 		"target": "esnext",
 		"module": "esnext",
 		"moduleResolution": "node",
+		"forceConsistentCasingInFileNames": true,
 		"strict": true,
 		"jsx": "preserve",
 		"sourceMap": true,
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
 		"lib": ["esnext", "dom"],
-		"allowJs": true
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"strictFunctionTypes": false,
+		"noImplicitAny": false,
+		"baseUrl": ".",
+		"paths": {
+			"/@/*": ["src/*"]
+		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
