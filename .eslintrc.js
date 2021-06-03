@@ -10,9 +10,13 @@ module.exports = {
 	],
 	parser: 'vue-eslint-parser',
 	parserOptions: {
-		ecmaVersion: 12,
 		parser: '@typescript-eslint/parser',
+		ecmaVersion: 2020,
 		sourceType: 'module',
+		jsxPragma: 'React',
+		ecmaFeatures: {
+			jsx: true,
+		},
 	},
 	plugins: ['vue', '@typescript-eslint'],
 	rules: {

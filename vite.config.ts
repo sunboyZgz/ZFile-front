@@ -1,35 +1,45 @@
-import type { UserConfig, AliasOptions } from 'vite'
-import { resolve } from 'path'
-import vue from '@vitejs/plugin-vue'
-import TSConfig from './tsconfig.json'
-
 // https://vitejs.dev/config/
-// export default defineConfig({
-// 	plugins: [vue()],
-// })
+import type { UserConfig, AliasOptions, ConfigEnv } from 'vite'
+import { loadEnv } from 'vite'
+import { resolve } from 'path'
+
+import TSConfig from './tsconfig.json'
+import { wrapperEnv } from './build/utils'
+import { createVitePlugins } from '/build/vite/plugins/'
 
 function pathResolve(dir: string) {
 	return resolve(process.cwd(), '.', dir)
 }
+/**
+ * @returns vite AliasOptions
+ * @description combine prompts of tsconfig paths to make path alias
+ */
+function resolveAlias(paths: Record<string, string[]>): AliasOptions {
+	const alias = Object.keys(paths).map(key => ({
+		find: new RegExp(key.split('*').join('')),
+		replacement: pathResolve(paths[key][0].split('*').join('')) + '/',
+	}))
+	return alias
+}
 
-export default (): UserConfig => {
+export default ({ mode, command }: ConfigEnv): UserConfig => {
+	const ROOT = process.cwd()
+	const env = loadEnv(mode, ROOT)
+	const VITE_ENV = wrapperEnv(env)
+	const { VITE_PORT, VITE_PUBLIC_PATH } = VITE_ENV
+	const isBuild = command === 'build'
 	const {
 		compilerOptions: { paths },
 	} = TSConfig
-
-	function resolveAlias(paths: Record<string, string[]>): AliasOptions {
-		// let resolvePaths: Record<string, string>
-		const alias = Object.keys(paths).map(key => ({
-			find: new RegExp(key.split('*').join('')),
-			replacement: pathResolve(paths[key][0].split('*').join('')) + '/',
-		}))
-		console.log(alias)
-		return alias
-	}
 	return {
+		base: VITE_PUBLIC_PATH,
+		root: ROOT,
+		server: {
+			port: VITE_PORT,
+		},
 		resolve: {
 			alias: resolveAlias(paths),
 		},
-		plugins: [vue()],
+		plugins: createVitePlugins(VITE_ENV, isBuild),
 	}
 }

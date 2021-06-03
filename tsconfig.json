@@ -12,12 +12,27 @@
 		"lib": ["esnext", "dom"],
 		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
+		"experimentalDecorators": true,
 		"strictFunctionTypes": false,
 		"noImplicitAny": false,
 		"baseUrl": ".",
 		"paths": {
-			"/@/*": ["src/*"]
-		}
+			"/@/*": ["src/*"],
+			"/build/*": ["build/*"]
+		},
+		"typeRoots": ["./node_modules/@types/", "./types/"],
+		"types": ["vite/client"],
+		"skipLibCheck": true
 	},
-	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.d.ts",
+		"src/**/*.tsx",
+		"src/**/*.vue",
+		"build/**/*.ts",
+		"types/**/*.d.ts",
+		"vite.config.ts",
+		"src/components/TestJSX.tsx"
+	],
+	"exclude": ["node_modules", "dist", "**/*.js"]
 }
