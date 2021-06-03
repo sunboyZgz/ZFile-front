@@ -8,3 +8,9 @@
 - formater 采用 [prettier](https://prettier.io/)
 - linter 采用 [eslint](https://eslint.org/)
 - 同时使用[husky](https://github.com/typicode/husky)调用 git hook 对提交到`github`的代码在`pre-commit`阶段进行，lint 与 format
+
+#### vite plugins
+
+- [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
+- [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx)
+- [vite-plugin-windicss](https://github.com/windicss/vite-plugin-windicss)
