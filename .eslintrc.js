@@ -21,6 +21,7 @@ module.exports = {
 	plugins: ['vue', '@typescript-eslint'],
 	rules: {
 		'no-use-before-define': 'off',
+		'no-mixed-spaces-and-tabs': 'off',
 
 		'@typescript-eslint/ban-types': ['off'],
 		'@typescript-eslint/no-explicit-any': ['off'],

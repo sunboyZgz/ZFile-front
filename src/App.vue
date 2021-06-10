@@ -1,31 +1,24 @@
 <template>
 	<img />
-	<HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
-	<HelloJSX />
+	<Counter />
+	<router-view />
+	<router-link to="/login">home</router-link>
+	<router-link to="/test">test</router-link>
+	<br />
+	<el-button type="primary">提交</el-button>
+	<el-button type="danger">删除</el-button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
-import HelloWorld from '/@/components/HelloWorld.vue'
-import HelloJSX from './components/TestJSX.tsx'
-
+import { usePageTitle } from '/@/hooks/'
 export default defineComponent({
 	name: 'App',
-	components: {
-		HelloWorld,
-		HelloJSX,
+	components: {},
+	setup() {
+		usePageTitle()
 	},
 })
 </script>
 
-<style>
-#app {
-	font-family: Avenir, Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
-	margin-top: 60px;
-}
-</style>
+<style></style>

@@ -26,7 +26,14 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
 	const ROOT = process.cwd()
 	const env = loadEnv(mode, ROOT)
 	const VITE_ENV = wrapperEnv(env)
-	const { VITE_PORT, VITE_PUBLIC_PATH } = VITE_ENV
+	const {
+		VITE_PORT,
+		VITE_PUBLIC_PATH,
+		VITE_OUT_DIR,
+		VITE_DROP_CONSOLE,
+		VITE_GLOB_APP_TITLE,
+		VITE_GLOB_APP_NAME,
+	} = VITE_ENV
 	const isBuild = command === 'build'
 	const {
 		compilerOptions: { paths },
@@ -36,6 +43,29 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
 		root: ROOT,
 		server: {
 			port: VITE_PORT,
+		},
+		css: {
+			preprocessorOptions: {
+				scss: {
+					additionalData: `@import "./src/cover.scss";`,
+				},
+			},
+		},
+		build: {
+			outDir: VITE_OUT_DIR,
+			target: 'es2015',
+			terserOptions: {
+				compress: {
+					drop_console: VITE_DROP_CONSOLE,
+					keep_infinity: true,
+				},
+			},
+		},
+		define: {
+			[`__APP__${VITE_GLOB_APP_NAME.toUpperCase()}`]: {
+				VITE_GLOB_APP_TITLE,
+				VITE_GLOB_APP_NAME,
+			},
 		},
 		resolve: {
 			alias: resolveAlias(paths),

@@ -18,7 +18,8 @@
 		"baseUrl": ".",
 		"paths": {
 			"/@/*": ["src/*"],
-			"/build/*": ["build/*"]
+			"/build/*": ["build/*"],
+			"/#/*": ["types/*"]
 		},
 		"typeRoots": ["./node_modules/@types/", "./types/"],
 		"types": ["vite/client"],
@@ -31,8 +32,7 @@
 		"src/**/*.vue",
 		"build/**/*.ts",
 		"types/**/*.d.ts",
-		"vite.config.ts",
-		"src/components/TestJSX.tsx"
+		"vite.config.ts"
 	],
 	"exclude": ["node_modules", "dist", "**/*.js"]
 }

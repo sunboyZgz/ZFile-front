@@ -14,3 +14,17 @@
 - [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
 - [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx)
 - [vite-plugin-windicss](https://github.com/windicss/vite-plugin-windicss)
+- [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)
+- [vite-plugin-style-import](https://github.com/anncwb/vite-plugin-style-import/tree/main#readme)
+- [vite-plugin-html](https://github.com/anncwb/vite-plugin-html/blob/main/src/injectHtml.ts)：`index.html`模板变量工具
+
+#### tech stack
+
+- [windicss](https://windicss.org/)
+- [vue3](https://v3.cn.vuejs.org/)
+- [vite](https://vitejs.dev/)
+- [vuex](https://next.vuex.vuejs.org/)
+- [vue-router](https://next.router.vuejs.org/)
+- [element-plus](https://github.com/element-plus/element-plus)
+- [sass](https://sass-lang.com/)
+- [vueuse](https://github.com/vueuse/vueuse)

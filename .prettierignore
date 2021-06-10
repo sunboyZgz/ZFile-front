@@ -4,8 +4,6 @@
 
 *.json
 
-*.css
-
 *.md
 
 /.husky

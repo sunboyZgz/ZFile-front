@@ -1,8 +1,10 @@
 {
+	"printWidth": 70,
 	"useTabs": true,
 	"tabWidth": 2,
 	"semi": false,
 	"singleQuote": true,
 	"jsxSingleQuote": true,
-	"arrowParens": "avoid"
+	"arrowParens": "avoid",
+	"endOfLine": "lf"
 }
