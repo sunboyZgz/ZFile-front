@@ -7,7 +7,7 @@ import TSConfig from './tsconfig.json'
 import { wrapperEnv } from './build/utils'
 import { createVitePlugins } from '/build/vite/plugins/'
 
-function pathResolve(dir: string) {
+export function pathResolve(dir: string): string {
 	return resolve(process.cwd(), '.', dir)
 }
 /**
@@ -20,20 +20,22 @@ function resolveAlias(paths: Record<string, string[]>): AliasOptions {
 		replacement: pathResolve(paths[key][0].split('*').join('')) + '/',
 	}))
 	return alias
+
+	// const alias = {}
+	// Object.keys(paths).map(key => {
+	// 	const akey = key.slice(0, key.length - 1)
+	// 	const dir = paths[key][0].slice(0, paths[key][0].length - 1)
+	// 	alias[akey] = pathResolve(dir)
+	// })
+	// console.log(alias)
+	// return alias
 }
 
 export default ({ mode, command }: ConfigEnv): UserConfig => {
 	const ROOT = process.cwd()
 	const env = loadEnv(mode, ROOT)
 	const VITE_ENV = wrapperEnv(env)
-	const {
-		VITE_PORT,
-		VITE_PUBLIC_PATH,
-		VITE_OUT_DIR,
-		VITE_DROP_CONSOLE,
-		VITE_GLOB_APP_TITLE,
-		VITE_GLOB_APP_NAME,
-	} = VITE_ENV
+	const { VITE_PORT, VITE_PUBLIC_PATH, VITE_OUT_DIR, VITE_DROP_CONSOLE } = VITE_ENV
 	const isBuild = command === 'build'
 	const {
 		compilerOptions: { paths },
@@ -47,7 +49,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
 		css: {
 			preprocessorOptions: {
 				scss: {
-					additionalData: `@import "./src/cover.scss";`,
+					// additionalData: `@import "/@/style/base";`,
 				},
 			},
 		},
@@ -61,12 +63,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
 				},
 			},
 		},
-		define: {
-			[`__APP__${VITE_GLOB_APP_NAME.toUpperCase()}`]: {
-				VITE_GLOB_APP_TITLE,
-				VITE_GLOB_APP_NAME,
-			},
-		},
+		define: {},
 		resolve: {
 			alias: resolveAlias(paths),
 		},

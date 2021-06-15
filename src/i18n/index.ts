@@ -7,7 +7,7 @@ import en from './locales/en'
 
 export let i18n: ReturnType<typeof createI18n>
 
-const messages = {
+export const messages = {
 	zh,
 	en,
 }
@@ -35,6 +35,7 @@ export async function setupI18n(app: App): Promise<void> {
 	i18n = createI18n(options)
 	app.use(i18n)
 }
+//eslint-disable-next-line
 export function useTypeI18n() {
 	const i18Fn = useI18n()
 	const myT: I18TypeT<MessageType> = i18Fn.t

@@ -2,10 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0"
-		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" href="/favicon.ico" />
 		<title><%= title %></title>
 		<style type="text/css">
@@ -120,17 +117,14 @@
 
 				var theme = window.localStorage.getItem('APP_DARK_MODE')
 
-				if (htmlRoot && theme) {
+				if (htmlRoot && theme === 'true') {
 					htmlRoot.classList.add('dark')
 					theme = htmlRoot = null
 				}
 			})()
 		</script>
 		<div id="app">
-			<img
-				class="absolute w-screen h-screen"
-				src="./src/assets/loading-bg.png"
-			/>
+			<img class="absolute w-screen h-screen" src="./src/assets/loading-bg.png" />
 			<a
 				class="
 					absolute
@@ -146,21 +140,10 @@
 			>
 				<img class="w-40 sm:w-80" src="./src/assets/logo.png" />
 			</a>
-			<div
-				class="
-					dark:bg-blue-gray-900
-					min-h-screen
-					flex
-					justify-center
-					items-center
-					flex-col
-				"
-			>
+			<div class="dark:bg-blue-gray-900 min-h-screen flex justify-center items-center flex-col">
 				<!-- <svg t="1623206803540" class="icon dark:fill-white" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="861" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40"><path d="M928 161.024h-228.8c-49.088 0-97.088 14.08-138.432 40.704L512 232.96l-48.832-31.36a255.232 255.232 0 0 0-138.368-40.64H96a32 32 0 0 0-32 32v568a32 32 0 0 0 32 32h228.8c49.088 0 97.088 14.08 138.368 40.704l44.416 28.544a8.32 8.32 0 0 0 4.288 1.28 7.488 7.488 0 0 0 4.352-1.28l44.352-28.544a256.384 256.384 0 0 1 138.624-40.704H928a32 32 0 0 0 32-32V193.024a32 32 0 0 0-32-32z m-603.2 560h-188.8V232.96h188.8c35.392 0 69.76 10.048 99.52 29.184l48.768 31.296 6.912 4.48v462.016a327.232 327.232 0 0 0-155.2-39.04z m563.2 0h-188.8c-54.4 0-107.584 13.376-155.2 38.976V297.984l6.912-4.48 48.768-31.36a183.552 183.552 0 0 1 99.52-29.12h188.8v488zM396.928 360.96H211.072c-3.84 0-7.04 3.392-7.04 7.488v44.992c0 4.096 3.2 7.488 7.04 7.488H396.8c3.84 0 7.04-3.392 7.04-7.488v-44.992a7.232 7.232 0 0 0-6.912-7.488z m223.104 7.488v44.992c0 4.096 3.2 7.488 7.04 7.488H812.8c3.84 0 7.04-3.392 7.04-7.488v-44.992c0-4.096-3.2-7.488-7.04-7.488H627.072c-3.84 0-7.04 3.392-7.04 7.488z m-223.104 132.48H211.072c-3.84 0-7.04 3.392-7.04 7.488v44.992c0 4.16 3.2 7.552 7.04 7.552H396.8c3.84 0 7.04-3.392 7.04-7.552v-44.992a7.232 7.232 0 0 0-6.912-7.488z m416 0H627.072c-3.84 0-7.04 3.392-7.04 7.488v44.992c0 4.16 3.2 7.552 7.04 7.552H812.8c3.84 0 7.04-3.392 7.04-7.552v-44.992a7.232 7.232 0 0 0-6.912-7.488z" p-id="862"></path></svg> -->
 				<div class="mb-4 dark:text-white">
-					<span class="text-lg font-semibold loading-text"
-						>loading</span
-					>
+					<span class="text-lg font-semibold loading-text">loading</span>
 					<i class="text-5xl dot-1">.</i>
 					<i class="text-5xl dot-2">.</i>
 					<i class="text-5xl dot-3">.</i>

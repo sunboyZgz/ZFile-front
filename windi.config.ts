@@ -4,4 +4,5 @@ export default defineConfig({
 	attributify: {
 		prefix: 'sun:',
 	},
+	// preflight: false,
 })

@@ -19,7 +19,8 @@
 		"paths": {
 			"/@/*": ["src/*"],
 			"/build/*": ["build/*"],
-			"/#/*": ["types/*"]
+			"/#/*": ["types/*"],
+			"/~/*": ["src/style/*"]
 		},
 		"typeRoots": ["./node_modules/@types/", "./types/"],
 		"types": ["vite/client"],

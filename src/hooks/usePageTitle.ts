@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n'
 import { REDIRECT_NAME } from '/@/router/constants'
 import { getAppInfo } from '/@/utils/env'
 
-export function usePageTitle() {
+export function usePageTitle(): void {
 	const { VITE_GLOB_APP_NAME: title } = getAppInfo()
 	const { currentRoute } = useRouter()
 	const { t } = useI18n()

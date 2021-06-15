@@ -25,11 +25,15 @@ module.exports = {
 
 		'@typescript-eslint/ban-types': ['off'],
 		'@typescript-eslint/no-explicit-any': ['off'],
+		'@typescript-eslint/no-empty-function': ['off'],
+		'@typescript-eslint/no-non-null-assertion': ['off'],
+		'@typescript-eslint/explicit-module-boundary-types': ['off'],
 
 		'vue/html-indent': ['off'],
 		'vue/singleline-html-element-content-newline': 'off',
 		'vue/max-attributes-per-line': 'off',
 		'vue/attributes-order': ['off'],
+		'vue/no-setup-props-destructure': 'off',
 		'vue/html-self-closing': [
 			'error',
 			{

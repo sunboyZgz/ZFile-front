@@ -1,0 +1,46 @@
+$prefixer: sun;
+$light_color--blue1: rgb(107, 196, 255);
+/*
+Bg-Color
+*/
+//light
+$bg_light--color: rgb(44, 65, 180);
+//dark
+$bg_dark--deep: rgb(15, 23, 42);
+$bg_dark--mid: rgb(30, 41, 59);
+
+/*
+Height
+*/
+$base_height--sm: 1.2rem;
+$base_height--md: 1.4rem;
+$base_height--lg: 1.7rem;
+
+@keyframes fadeIn {
+	0% {
+		transform: translate3d(-50%, 0, 0);
+		opacity: 0;
+	}
+	100% {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+	}
+}
+@keyframes fadeIn_back {
+	0% {
+		transform: translate3d(-50%, 0, 0);
+		opacity: 0;
+	}
+	100% {
+		transform: translate3d(-10%, 0, 0);
+		opacity: 1;
+	}
+}
+
+.clip-text {
+	background-clip: text;
+	color: transparent;
+	-webkit-background-clip: text;
+	overflow: hidden;
+	white-space: nowrap;
+}
