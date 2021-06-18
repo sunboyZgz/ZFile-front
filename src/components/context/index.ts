@@ -1,8 +1,5 @@
-import { InjectionKey, Ref } from 'vue'
-
-export interface AppProviderContextProps {
-	prefixCls: Ref<string>
-	isMobile: Ref<boolean>
+import type { Ref, InjectionKey } from 'vue'
+interface ContextOptions {
+	smallScreen: Ref<boolean>
 }
-
-export const key: InjectionKey<AppProviderContextProps> = Symbol()
+export const key: InjectionKey<ContextOptions> = Symbol('context')

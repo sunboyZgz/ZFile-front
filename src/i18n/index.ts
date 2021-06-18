@@ -12,6 +12,32 @@ export const messages = {
 	en,
 }
 
+export enum dropDropKeys {
+	ZH = '1',
+	EN = '2',
+}
+
+export const options = [
+	{
+		label: '中文',
+		key: '1',
+	},
+	{
+		label: 'English',
+		key: '2',
+	},
+]
+
+export const useI18Select = locale => {
+	return (key: string) => {
+		if (key === dropDropKeys.ZH) {
+			locale.value = 'zh'
+		} else if (key === dropDropKeys.EN) {
+			locale.value = 'en'
+		}
+	}
+}
+
 type Locales = typeof messages
 type LocaleType = keyof Locales
 type MessageType = Readonly<typeof messages['zh']>

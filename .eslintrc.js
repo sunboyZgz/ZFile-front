@@ -22,12 +22,14 @@ module.exports = {
 	rules: {
 		'no-use-before-define': 'off',
 		'no-mixed-spaces-and-tabs': 'off',
+		'no-debugger': 'off',
 
 		'@typescript-eslint/ban-types': ['off'],
 		'@typescript-eslint/no-explicit-any': ['off'],
 		'@typescript-eslint/no-empty-function': ['off'],
 		'@typescript-eslint/no-non-null-assertion': ['off'],
 		'@typescript-eslint/explicit-module-boundary-types': ['off'],
+		'@typescript-eslint/no-extra-semi': ['off'],
 
 		'vue/html-indent': ['off'],
 		'vue/singleline-html-element-content-newline': 'off',

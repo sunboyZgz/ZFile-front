@@ -8,7 +8,8 @@
 			dark:bg-blue-gray-800
 			transition-colors
 			duration-500
-			flex
+			flex flex-col
+			lg:flex-row
 		"
 		:class="{ 'login--color': isSmall }"
 	>
@@ -121,32 +122,27 @@
 				class="absolute top-[49%] left-[43%] transform-gpu -translate-x-1/2 -translate-y-1/2"
 			/>
 		</div>
-		<div class="lg:flex-1 flex-none"></div>
+		<div class="flex lg:flex-1 justify-center lg:justify-start mt-12 lg:mt-0">
+			<div class="w-[80%] lg:w-[70%] flex flex-col text-left justify-center">
+				<h2 class="enter_xleft-0 text-4xl dark:text-white hidden lg:block text-left mb-8">
+					{{ t('login') }}
+				</h2>
+				<Form />
+			</div>
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, ref, unref, watchEffect } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
-import { useTypeI18n } from '/@/i18n/'
+import { useTypeI18n, useI18Select, options } from '/@/i18n/'
+import Form from './login-cmp/Form.vue'
 import SunSwitch from '/@/components/Switch.vue'
 import { MoonIcon, SunIcon, GithubIcon, TransIcon, PrintSvg } from '/@/components/icon/'
-import { useThemeMode } from '/@/hooks/useThemeMode'
-import { key } from '/@/components/context/AppContextProvider.vue'
-
+import { useThemeMode, useSmallSize } from '/@/hooks/index'
 const github = import.meta.env.VITE_GITHUB
-const options = [
-	{
-		label: '中文',
-		key: '1',
-	},
-	{
-		label: 'English',
-		key: '2',
-	},
-]
 
-type dropDropKeys = '1' | '2'
 export default defineComponent({
 	name: 'Home',
 	components: {
@@ -156,29 +152,23 @@ export default defineComponent({
 		GithubIcon,
 		TransIcon,
 		PrintSvg,
+		Form,
 	},
 	setup() {
 		const { t, locale } = useTypeI18n()
+		const handleSelect = useI18Select(locale)
 		const store = useStore()
 		const darkRef = computed(() => store.getters['themeModule/getDark'])
-		const isSmall = ref(false)
-
-		const handleSelect = (key: dropDropKeys) => {
-			if (key === '1') {
-				locale.value = 'zh'
-			} else if (key === '2') {
-				locale.value = 'en'
-			}
-		}
+		const isSmall = useSmallSize()
 		useThemeMode(darkRef)
 		const toggleMode = (): void => {
 			store.commit('themeModule/changeMode')
 			localStorage.setItem('APP_DARK_MODE', darkRef.value)
 		}
-		const screenSize = inject(key)
-		watchEffect(() => {
-			isSmall.value = unref(false || screenSize!.smallScreen)
-		})
+		// const screenSize = inject(key)
+		// watchEffect(() => {
+		// 	isSmall.value = unref(false || screenSize!.smallScreen)
+		// })
 		return {
 			t,
 			toggleMode,

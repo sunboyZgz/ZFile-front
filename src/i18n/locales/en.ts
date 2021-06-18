@@ -1,7 +1,17 @@
 import type { I18Message } from '/#/i18n'
 const en: I18Message = {
-	pageTitle: 'Login',
-	test: 'Test',
+	loginpage: 'Login',
+	installpage: 'Install',
+	login: 'Login',
+	account: {
+		user: 'account',
+		pw: 'password',
+	},
+	lg_ph: {
+		user: 'please input account',
+		pw: 'please input password',
+	},
+	lg_button: 'login',
 	title: 'manage server more efficiently',
 }
 export default en

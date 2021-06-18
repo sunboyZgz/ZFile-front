@@ -14,21 +14,26 @@ const LoginRoute: RouteRecordRaw = {
 	name: 'Login',
 	component: () => import('/@/pages/Login.vue'),
 	meta: {
-		title: 'pageTitle',
+		title: 'loginpage',
 	},
 }
 
-const TestRoute: RouteRecordRaw = {
-	path: '/test',
-	name: 'Test',
-	component: () => import('/@/pages/Login.vue'),
+const InstallRoute: RouteRecordRaw = {
+	path: '/install',
+	name: 'Install',
+	component: () => import('/@/pages/Install.vue'),
 	meta: {
-		title: 'test',
+		title: 'installpage',
 	},
 }
 
-export const baseRoutes = [
-	RedirectRoute,
-	LoginRoute,
-	TestRoute,
-] as RouteRecordRaw[]
+const MainRoute: RouteRecordRaw = {
+	path: '/main',
+	name: 'main',
+	component: () => import('/@/pages/Main.vue'),
+	meta: {
+		title: 'mainpage',
+	},
+}
+
+export const baseRoutes = [RedirectRoute, LoginRoute, InstallRoute, MainRoute] as RouteRecordRaw[]

@@ -1,16 +1,19 @@
 <template>
-	<n-config-provider :theme="darkTheme">
-		<AppContextProvider :small-screen="smallScreen">
-			<router-view />
-		</AppContextProvider>
+	<n-config-provider :theme="isDark ? darkTheme : ''" :theme-overrides="themeOverrides">
+		<n-message-provider>
+			<AppContextProvider :small-screen="smallScreen">
+				<router-view />
+			</AppContextProvider>
+		</n-message-provider>
 	</n-config-provider>
 </template>
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import AppContextProvider from '/@/components/context/AppContextProvider.vue'
 import { usePageTitle, useResize } from '/@/hooks/'
-import { darkTheme } from '/@/setupUI'
+import { darkTheme, themeOverrides } from '/@/setupUI'
 import { LG } from '/@/utils/env'
+import { useStore } from 'vuex'
 export default defineComponent({
 	name: 'App',
 	components: {
@@ -20,6 +23,7 @@ export default defineComponent({
 		usePageTitle()
 		const smallScreen = ref(false)
 		const size = useResize()
+		const isDark = computed(() => useStore().getters['themeModule/getDark'])
 		watch(
 			() => size[0],
 			currentSize => {
@@ -30,13 +34,7 @@ export default defineComponent({
 				}
 			}
 		)
-		return { darkTheme, smallScreen }
+		return { darkTheme, smallScreen, isDark, themeOverrides }
 	},
 })
 </script>
-
-<style>
-/* body {
-	@apply dark:bg-blue-gray-900;
-} */
-</style>

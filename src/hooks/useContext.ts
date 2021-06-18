@@ -1,6 +1,6 @@
 import type { InjectionKey } from 'vue'
-import { provide, reactive, inject, readonly as defineReadonly } from 'vue'
-
+import { provide, reactive, inject, readonly as defineReadonly, watchEffect, ref, unref } from 'vue'
+import { key as contextKey } from '/@/components/context/'
 export interface CreateContextOptions {
 	readonly?: boolean
 }
@@ -22,4 +22,17 @@ export function createContext<T>(
 export function useContext<T>(key: InjectionKey<T>): T
 export function useContext<T>(key: InjectionKey<T>, defaultValue?: T): T | {} {
 	return inject(key, defaultValue ?? {})
+}
+
+/**
+ * @description a easy hook with context-provider to watch window size
+ * @returns Ref
+ */
+export function useSmallSize() {
+	const isSmall = ref(false)
+	const screenSize = inject(contextKey)
+	watchEffect(() => {
+		isSmall.value = unref(false || screenSize!.smallScreen)
+	})
+	return isSmall
 }

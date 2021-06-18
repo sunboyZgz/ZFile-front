@@ -5,6 +5,7 @@
 		"build": "vue-tsc --noEmit && vite build",
 		"preview": "npm run build && npm run serve",
 		"serve": "vite preview --open",
+		"test": "ts-node ./test/",
 		"pretty-quick": "pretty-quick --staged --ignore-path .gitignore",
 		"lint": "eslint \"src/**/*.{vue,ts,tsx}\"",
 		"unusable": "lint-staged -c ./.husky/lintstagedrc.js"

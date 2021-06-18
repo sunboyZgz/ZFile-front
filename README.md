@@ -25,6 +25,6 @@
 - [vite](https://vitejs.dev/)
 - [vuex](https://next.vuex.vuejs.org/)
 - [vue-router](https://next.router.vuejs.org/)
-- [ui-未定]()
+- [naive-ui](https://github.com/TuSimple/naive-ui)
 - [sass](https://sass-lang.com/)
 - [vueuse](https://github.com/vueuse/vueuse)

@@ -1,5 +1,8 @@
 $prefixer: sun;
 $light_color--blue1: rgb(107, 196, 255);
+$light_color--blue2: rgba(107, 196, 255, 0.9);
+$light_color--gray1: rgba(209, 213, 219, 0.7);
+$light_color--gray2: rgb(209, 213, 219);
 /*
 Bg-Color
 */
@@ -16,6 +19,19 @@ $base_height--sm: 1.2rem;
 $base_height--md: 1.4rem;
 $base_height--lg: 1.7rem;
 
+@keyframes fadeInto {
+	0% {
+		opacity: 0;
+		display: block;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+.fadeInto {
+	animation: fadeInto 1s ease-in-out;
+	animation-fill-mode: forwards;
+}
 @keyframes fadeIn {
 	0% {
 		transform: translate3d(-50%, 0, 0);
@@ -34,6 +50,26 @@ $base_height--lg: 1.7rem;
 	100% {
 		transform: translate3d(-10%, 0, 0);
 		opacity: 1;
+	}
+}
+
+@keyframes enter-x-l {
+	0% {
+		transform: translate3d(60%, 0, 0);
+		opacity: 0;
+	}
+	100% {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+	}
+}
+
+@for $i from 0 to 5 {
+	.enter_xleft-#{$i} {
+		animation: enter-x-l 0.4s;
+		animation-delay: $i * 0.1s;
+		animation-timing-function: cubic-bezier(0.94, 0.06, 0.74, 0.865);
+		animation-fill-mode: forwards;
 	}
 }
 

@@ -3,12 +3,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, InjectionKey, Ref, toRefs } from 'vue'
+import { defineComponent, toRefs } from 'vue'
 import { createContext } from '/@/hooks/useContext'
-interface ContextOptions {
-	smallScreen: Ref<boolean>
-}
-export const key: InjectionKey<ContextOptions> = Symbol('context')
+import { key } from './index'
+
 export default defineComponent({
 	name: 'AppContextProvider',
 	inheritAttrs: false,

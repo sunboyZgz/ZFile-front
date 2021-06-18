@@ -6,3 +6,4 @@ dist-ssr
 10
 yarn-error.log
 .vscode
+test/**/*
