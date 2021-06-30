@@ -1,4 +1,6 @@
 import type { App } from 'vue'
+import contextmenu from 'v-contextmenu'
+import 'v-contextmenu/dist/themes/default.css'
 
 // import { ElButton, ElSelect, ElInput, ElOption } from 'element-plus'
 import {
@@ -12,9 +14,19 @@ import {
 	NFormItemRow,
 	NInput,
 	NMessageProvider,
+	NDataTable,
+	NNotificationProvider,
 } from 'naive-ui'
 //dark mode
-import { createTheme, buttonDark, dropdownDark, formDark, inputDark } from 'naive-ui'
+import {
+	createTheme,
+	buttonDark,
+	dropdownDark,
+	formDark,
+	inputDark,
+	dataTableDark,
+	notificationDark,
+} from 'naive-ui'
 import 'vfonts/FiraCode.css'
 import type { GlobalThemeOverrides } from 'naive-ui'
 import formItemDark from 'naive-ui/lib/form/styles/dark'
@@ -32,9 +44,12 @@ export function setupUI(app: App): void {
 			NInput,
 			NMessageProvider,
 			NFormItemRow,
+			NDataTable,
+			NNotificationProvider,
 		],
 	})
 	app.use(naive)
+	app.use(contextmenu)
 }
 
 export const darkTheme = createTheme([
@@ -44,6 +59,8 @@ export const darkTheme = createTheme([
 	inputDark,
 	formItemDark,
 	messageDark,
+	dataTableDark,
+	notificationDark,
 ])
 
 //themeColor change

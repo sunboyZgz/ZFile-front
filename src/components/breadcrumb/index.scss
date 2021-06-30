@@ -1,0 +1,18 @@
+@import '../style/base';
+
+$breadcrumb: #{$prefixer}-breadcrumb;
+
+.#{$breadcrumb} {
+	display: flex;
+	& > * {
+		flex-grow: 0;
+		flex-shrink: 0;
+	}
+	& > *:not(:nth-last-child(1)) {
+		margin: 0 0.25rem 0 0;
+	}
+	& > .#{$breadcrumb}-item:last-of-type {
+	}
+}
+.#{$breadcrumb}-item {
+}

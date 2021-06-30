@@ -10,21 +10,20 @@
 	>
 		<n-form-item
 			class="enter_xleft-1"
-			path="user.name"
+			path="user.account"
 			:label="`${t('account.user')}：`"
 			:label-style="labelStyle"
 		>
 			<n-input
 				style="--box-shadow-focus: 0 0 0 2px rgba(107, 196, 255, 0.2)"
-				autofocus
 				@keydown.enter.prevent
 				:placeholder="t('lg_ph.user')"
-				v-model:value="formValue.user.name"
+				v-model:value="formValue.user.account"
 			/>
 		</n-form-item>
 		<n-form-item
 			class="enter_xleft-2 lg:mb-8 relative"
-			path="user.pw"
+			path="user.cipher"
 			:label="`${t('account.pw')}：`"
 			:label-style="labelStyle"
 		>
@@ -33,7 +32,7 @@
 				:type="showPw ? 'password' : 'text'"
 				@keydown.enter.prevent
 				:placeholder="t('lg_ph.pw')"
-				v-model:value="formValue.user.pw"
+				v-model:value="formValue.user.cipher"
 			/>
 			<div class="absolute right-[5%]">
 				<Eye
@@ -44,7 +43,7 @@
 				/>
 			</div>
 		</n-form-item>
-		<n-button class="w-full enter_xleft-3" attr-type="button" type="info" @click="validate">
+		<n-button class="w-full enter_xleft-3" attr-type="button" type="info" @click="clickLogin">
 			{{ t('lg_button') }}
 		</n-button>
 	</n-form>
@@ -52,10 +51,14 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
-// import { useMessage } from 'naive-ui'
+import { useMessage } from 'naive-ui'
 import { useTypeI18n } from '/@/i18n'
 import { useSmallSize } from '/@/hooks/index'
 import { Eye } from '/@/components/icon/'
+import { loginUser } from '/@/network/login'
+import { isUsefulReq } from '/@/network/_utils'
+import { debounce } from '/@/utils/common'
+import { useRouter } from 'vue-router'
 // interface FormValue {
 // 	user: string
 // 	pw: string
@@ -73,31 +76,51 @@ export default defineComponent({
 		const labelStyle = computed(() => ({
 			color: isSmall.value ? 'white' : '',
 		}))
-		const formRef = ref(null)
+		const formRef = ref<HTMLFormElement | null>(null)
 		const formValue = ref({
 			user: {
-				name: '',
-				pw: '',
+				account: '',
+				cipher: '',
 			},
 		})
+		const message = useMessage()
+		const router = useRouter()
 		const rules = {
 			user: {
-				name: {
+				account: {
 					required: true,
 					message: '请输入姓名',
 					trigger: 'blur',
 				},
-				pw: {
+				cipher: {
 					required: true,
 					message: '请输入年龄',
 					trigger: 'blur',
 				},
 			},
 		}
-
-		const validate = () => {
-			;(formRef.value as any).validate(errors => {})
-		}
+		const debounce_time = 5
+		const clickLogin = debounce(
+			(e: MouseEvent) => {
+				e.preventDefault()
+				formRef.value?.validate(async errors => {
+					if (!errors) {
+						const { status, message: info } = await loginUser(formValue.value.user)
+						if (isUsefulReq(status)) {
+							router.push('/main')
+						} else {
+							message.error(info as string)
+						}
+					}
+				})
+			},
+			debounce_time * 1000,
+			debounce(() => {
+				message.warning(
+					`get verification code control more frequently, ${debounce_time}s every time.`
+				)
+			}, 1000)
+		)
 		const changePwStat = () => {
 			showPw.value = !showPw.value
 		}
@@ -108,9 +131,9 @@ export default defineComponent({
 			formRef,
 			formValue,
 			rules,
-			validate,
 			showPw,
 			changePwStat,
+			clickLogin,
 		}
 	},
 })

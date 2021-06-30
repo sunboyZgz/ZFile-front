@@ -9,6 +9,7 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from 'vue'
+
 import AppContextProvider from '/@/components/context/AppContextProvider.vue'
 import { usePageTitle, useResize } from '/@/hooks/'
 import { darkTheme, themeOverrides } from '/@/setupUI'
@@ -21,6 +22,7 @@ export default defineComponent({
 	},
 	setup() {
 		usePageTitle()
+
 		const smallScreen = ref(false)
 		const size = useResize()
 		const isDark = computed(() => useStore().getters['themeModule/getDark'])
@@ -34,6 +36,7 @@ export default defineComponent({
 				}
 			}
 		)
+
 		return { darkTheme, smallScreen, isDark, themeOverrides }
 	},
 })

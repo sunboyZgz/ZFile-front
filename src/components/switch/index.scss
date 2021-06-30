@@ -1,0 +1,52 @@
+@import '../style/base';
+$switch: #{$prefixer}_switch;
+@mixin switch_inner($height) {
+	width: $height * 0.8;
+	height: $height * 0.8;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+	transform: translate3d(15%, 0, 0);
+	transition-duration: 0.5s;
+	transition-timing-function: cubic-bezier(0.565, 0.065, 0.105, 0.84);
+
+	&:hover {
+		box-shadow: 0 0 2px 1px $bg_light--color;
+	}
+}
+.#{$switch} {
+	box-shadow: 0 0 1px 2px rgba(65, 65, 65, 0.3) inset;
+	&:hover {
+		cursor: pointer;
+		// box-shadow: 0 0 0 1px $light_color--blue1, 0 0 1px 2px rgba(65, 65, 65, 0.3) inset;
+	}
+
+	&.#{$switch}-sm {
+		width: 2.2rem;
+		height: $base_height--sm;
+	}
+	&.#{$switch}-md {
+		width: 2.5rem;
+		height: $base_height--md;
+	}
+	&.#{$switch}-lg {
+		width: 3.2rem;
+		height: $base_height--lg;
+	}
+	.#{$switch}-inner-sm {
+		@include switch_inner($base_height--sm);
+		&.active {
+			transform: translate3d(calc(2.2rem - 115%), 0, 0);
+		}
+	}
+	.#{$switch}-inner-md {
+		@include switch_inner($base_height--md);
+		&.active {
+			transform: translate3d(calc(2.5rem - 115%), 0, 0);
+		}
+	}
+	.#{$switch}-inner-lg {
+		@include switch_inner($base_height--lg);
+		&.active {
+			transform: translate3d(calc(3.2rem - 115%), 0, 0);
+		}
+	}
+}

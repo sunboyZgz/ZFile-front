@@ -28,3 +28,4 @@
 - [naive-ui](https://github.com/TuSimple/naive-ui)
 - [sass](https://sass-lang.com/)
 - [vueuse](https://github.com/vueuse/vueuse)
+- [axios](https://axios-http.com/zh/docs/intro)

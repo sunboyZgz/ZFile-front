@@ -1,0 +1,39 @@
+@import '../style/base';
+$menu: #{$prefixer}_menu;
+$menuItem: #{$menu}Item;
+.#{$menu} {
+	min-width: 3rem;
+	width: 3rem;
+	.#{$menu}-horizontal {
+		display: flex;
+		.#{$menuItem}:not(:first-of-type) {
+			margin-left: 1rem;
+			padding-left: 1.5rem;
+		}
+	}
+}
+.#{$menu}-vertical {
+	display: block;
+	.#{$menuItem}:not(:first-of-type) {
+		margin-top: 1rem;
+	}
+}
+.#{$menu}-horizontal,
+.#{$menu}-vertical {
+	.#{$menuItem} {
+		position: relative;
+		display: flex;
+		cursor: pointer;
+		.item-icon {
+			position: absolute;
+			left: 0;
+			width: 1.5rem;
+		}
+	}
+	// .#{$menu}-horizontal .#{$menuItem}{
+	//   padding-left: 1.5rem;
+	// }
+	// .#{$menu}-vertical .#{$menuItem} {
+	//   padding-left: 1rem;
+	// }
+}

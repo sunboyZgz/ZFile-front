@@ -1,6 +1,7 @@
 const zh = {
 	loginpage: '登录',
 	installpage: '启动',
+	mainpage: '主页',
 	login: '登录',
 	account: {
 		user: '账号',

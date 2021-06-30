@@ -2,6 +2,7 @@ import type { I18Message } from '/#/i18n'
 const en: I18Message = {
 	loginpage: 'Login',
 	installpage: 'Install',
+	mainpage: 'Main',
 	login: 'Login',
 	account: {
 		user: 'account',

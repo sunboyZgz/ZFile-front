@@ -1,17 +1,18 @@
 $prefixer: sun;
-$light_color--blue1: rgb(107, 196, 255);
-$light_color--blue2: rgba(107, 196, 255, 0.9);
-$light_color--gray1: rgba(209, 213, 219, 0.7);
-$light_color--gray2: rgb(209, 213, 219);
 /*
 Bg-Color
 */
 //light
+$light_color--blue1: rgb(107, 196, 255);
+$light_color--blue2: rgba(107, 196, 255, 0.9);
+$light_color--gray1: rgba(209, 213, 219, 0.7);
+$light_color--gray2: rgb(209, 213, 219);
+$light_color--gray3: rgba(110, 110, 110, 0.7);
 $bg_light--color: rgb(44, 65, 180);
 //dark
 $bg_dark--deep: rgb(15, 23, 42);
 $bg_dark--mid: rgb(30, 41, 59);
-
+$bg_dark--sm: rgb(38, 38, 42);
 /*
 Height
 */
@@ -79,4 +80,21 @@ $base_height--lg: 1.7rem;
 	-webkit-background-clip: text;
 	overflow: hidden;
 	white-space: nowrap;
+}
+
+.sun-scroll::-webkit-scrollbar {
+	width: 0.4rem;
+	background-color: rgba(209, 213, 219, 0.1);
+}
+.sun-scroll::-webkit-scrollbar-thumb {
+	width: 0.4rem;
+	height: 4rem;
+	border-radius: 0.2rem;
+	background-color: rgb(124, 124, 124);
+}
+.sun-scroll.dark::-webkit-scrollbar-thumb {
+	width: 0.4rem;
+	height: 4rem;
+	border-radius: 0.2rem;
+	background-color: rgb(124, 124, 124);
 }

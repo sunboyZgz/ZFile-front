@@ -5,7 +5,10 @@ import { unrefDom } from '/@/utils/common'
 //eslint-disable-next-line
 export function useResize(ref?: Ref<HTMLElement>) {
 	const dom = unrefDom(ref)
-	const screenSize = reactive([0, 0])
+	const screenSize = reactive([
+		document.documentElement.clientWidth,
+		document.documentElement.clientHeight,
+	])
 	const resizeObserver = new ResizeObserver(elms => {
 		const target = elms && elms[0]
 		screenSize[0] = target.contentRect.width

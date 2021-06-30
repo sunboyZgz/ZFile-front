@@ -32,6 +32,7 @@ module.exports = {
 		'@typescript-eslint/no-extra-semi': ['off'],
 
 		'vue/html-indent': ['off'],
+		'vue/no-parsing-error': 'off',
 		'vue/singleline-html-element-content-newline': 'off',
 		'vue/max-attributes-per-line': 'off',
 		'vue/attributes-order': ['off'],
@@ -48,5 +49,7 @@ module.exports = {
 				math: 'always',
 			},
 		],
+		'vue/html-closing-bracket-newline': 'off',
+		'vue/multiline-html-element-content-newline': 'off',
 	},
 }

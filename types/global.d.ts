@@ -7,6 +7,7 @@ declare global {
 		VITE_OUT_DIR: string
 		VITE_HTML_SMALL: boolean
 		VITE_GITHUB: string
+		VITE_BASE_URL: string
 	}
 	interface ImportMetaEnv extends ViteEnv {
 		__: unknown

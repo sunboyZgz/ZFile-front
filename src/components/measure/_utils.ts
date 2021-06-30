@@ -3,6 +3,14 @@ export interface MeasureItemProps {
 	level: number
 	color: string
 }
+
+const isMenuItem = (item: any): item is MeasureItemProps => {
+	if (!item.level || !item.color) {
+		console.error("measure_item's level should be a object like {level: 1, color: red}")
+		return false
+	} else return true
+}
+
 /**
  * @description to check whether levels is OK
  */
@@ -11,11 +19,7 @@ const isLevelable = function (level: any) {
 		console.error("measure_item's level should be a object")
 		return false
 	}
-	if (!level.level || !level.color) {
-		console.error("measure_item's level should be a object like {level: 1, color: red}")
-		return false
-	}
-	return true
+	return isMenuItem(level)
 }
 /**
  * @description to get a Levels

@@ -5,7 +5,6 @@ import 'virtual:windi.css'
 import { setupI18n } from './i18n/'
 import { setupUI } from './setupUI'
 import { setupWindow } from '/@/utils/env'
-
 import vueStore from './store/'
 import router from './router/'
 
@@ -20,5 +19,8 @@ async function setup() {
 	app.use(vueStore)
 	await router.isReady()
 	app.mount('#app')
+	// document.getElementById('app')!.className =
+	// 	'w-screen h-screen max-h-screen max-w-screen overflow-hidden'
 }
+
 setTimeout(setup, 0)

@@ -29,7 +29,7 @@ const InstallRoute: RouteRecordRaw = {
 
 const MainRoute: RouteRecordRaw = {
 	path: '/main',
-	name: 'main',
+	name: 'Main',
 	component: () => import('/@/pages/Main.vue'),
 	meta: {
 		title: 'mainpage',

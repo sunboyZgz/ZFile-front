@@ -7,3 +7,5 @@ dist-ssr
 yarn-error.log
 .vscode
 test/**/*
+.env.development
+.env.production
