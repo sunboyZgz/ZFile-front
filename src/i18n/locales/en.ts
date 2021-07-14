@@ -14,5 +14,19 @@ const en: I18Message = {
 	},
 	lg_button: 'login',
 	title: 'manage server more efficiently',
+	tablle: {
+		header: {
+			name: 'name',
+			time: 'time',
+			size: 'size',
+		},
+		leftnav: {
+			'folder-add': 'folder add',
+			'file-add': 'file add',
+			'sign-out': 'sign out',
+			download: 'download',
+			fullScreen: 'full screen',
+		},
+	},
 }
 export default en

@@ -13,6 +13,20 @@ const zh = {
 	},
 	lg_button: '登录',
 	title: '使你的服务器管理更高效',
+	tablle: {
+		header: {
+			name: '文件名',
+			time: '时间',
+			size: '大小',
+		},
+		leftnav: {
+			'folder-add': '上传文件夹',
+			'file-add': '上传文件',
+			'sign-out': '退出',
+			download: '下载',
+			fullScreen: '全屏',
+		},
+	},
 }
 
 export default zh

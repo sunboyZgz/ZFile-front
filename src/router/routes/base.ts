@@ -3,7 +3,7 @@ import { REDIRECT_NAME } from '../constants'
 const RedirectRoute: RouteRecordRaw = {
 	path: '/',
 	name: REDIRECT_NAME,
-	redirect: '/login',
+	redirect: '/main',
 	meta: {
 		title: REDIRECT_NAME,
 	},
@@ -28,7 +28,7 @@ const InstallRoute: RouteRecordRaw = {
 }
 
 const MainRoute: RouteRecordRaw = {
-	path: '/main',
+	path: '/main/:path*',
 	name: 'Main',
 	component: () => import('/@/pages/Main.vue'),
 	meta: {

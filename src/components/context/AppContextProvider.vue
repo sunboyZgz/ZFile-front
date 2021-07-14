@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs } from 'vue'
+import { defineComponent, toRef } from 'vue'
 import { createContext } from '/@/hooks/useContext'
 import { key } from './index'
 
@@ -17,7 +17,7 @@ export default defineComponent({
 		},
 	},
 	setup(props) {
-		const { smallScreen } = toRefs(props)
+		const smallScreen = toRef(props, 'smallScreen')
 		createContext(key, { smallScreen }, {})
 	},
 })

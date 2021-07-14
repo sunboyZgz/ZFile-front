@@ -16,6 +16,10 @@ import {
 	NMessageProvider,
 	NDataTable,
 	NNotificationProvider,
+	NModal,
+	NSpin,
+	NDrawer,
+	NCheckbox,
 } from 'naive-ui'
 //dark mode
 import {
@@ -26,12 +30,15 @@ import {
 	inputDark,
 	dataTableDark,
 	notificationDark,
+	progressDark,
+	modalDark,
+	spinDark,
+	drawerDark,
+	checkboxDark,
 } from 'naive-ui'
 import 'vfonts/FiraCode.css'
 import type { GlobalThemeOverrides } from 'naive-ui'
 import formItemDark from 'naive-ui/lib/form/styles/dark'
-
-// import { forEach } from './utils/common'
 
 export function setupUI(app: App): void {
 	const naive = create({
@@ -46,6 +53,10 @@ export function setupUI(app: App): void {
 			NFormItemRow,
 			NDataTable,
 			NNotificationProvider,
+			NModal,
+			NSpin,
+			NDrawer,
+			NCheckbox,
 		],
 	})
 	app.use(naive)
@@ -61,6 +72,11 @@ export const darkTheme = createTheme([
 	messageDark,
 	dataTableDark,
 	notificationDark,
+	progressDark,
+	modalDark,
+	spinDark,
+	drawerDark,
+	checkboxDark,
 ])
 
 //themeColor change
@@ -68,4 +84,5 @@ export const themeOverrides: GlobalThemeOverrides = {
 	Input: {
 		borderFocus: '1px solid rgb(107, 196, 255)',
 	},
+	Spin: {},
 }

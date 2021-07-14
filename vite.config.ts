@@ -45,6 +45,15 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
 		root: ROOT,
 		server: {
 			port: VITE_PORT,
+			proxy: isBuild
+				? undefined
+				: {
+						'/api': {
+							target: 'http://1.15.153.38:4799/zfile',
+							changeOrigin: true,
+							rewrite: path => path.replace(/^\/api/, ''),
+						},
+				  },
 		},
 		css: {
 			preprocessorOptions: {

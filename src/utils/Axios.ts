@@ -42,7 +42,6 @@ export default class Axios {
 		return this.request({ ...config, method: 'DELETE' })
 	}
 	private request<T = any>(config: AxiosRequestConfig): Promise<T> {
-		console.log('config', config)
 		return new Promise((resolve, reject) => {
 			this.axiosInstance
 				.request(config)

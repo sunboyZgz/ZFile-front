@@ -1,0 +1,75 @@
+$prefixer: sun-cm;
+$material-darker: #212121;
+h4 {
+	margin: 0;
+}
+
+.mask {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+.red {
+	background-color: red;
+}
+
+.green {
+	background-color: green;
+}
+.yellow {
+	background-color: rgb(255, 208, 0);
+}
+
+.#{$prefixer} {
+	position: absolute;
+	z-index: 999;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 0.3rem;
+	overflow: hidden;
+	box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2), 2px 3px 3px 0 rgba(0, 0, 0, 0.2);
+	min-width: 20rem;
+	width: 50rem;
+}
+.#{$prefixer}-controlbar {
+	position: relative;
+	display: flex;
+	padding: 0.5rem 0 0.5rem 0;
+	background-color: white;
+}
+.#{$prefixer}-title {
+	position: absolute;
+	font-family: 'Consolas';
+	font-weight: normal;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.#{$prefixer}-buttons {
+	display: flex;
+}
+.#{$prefixer}-btn {
+	margin: 0 0 0 0.5rem;
+	flex-shrink: 0;
+	flex-grow: 0;
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: color 0.25s ease-in-out, opacity 0.25s ease-in-out;
+	&.active {
+		opacity: 0.7;
+	}
+}
+.#{$prefixer}-container {
+	position: relative;
+	background-color: $material-darker;
+	padding: 0.5rem 1rem 0 1rem;
+	line-height: 1.2;
+	min-height: 40rem;
+	height: 100%;
+}

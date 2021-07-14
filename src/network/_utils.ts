@@ -15,8 +15,8 @@ export const isUsefulReq = (status: string | number) => {
 }
 
 export interface Progress {
-	start: normalFn
-	pendding?: (message?: Shedule) => any
+	start?: normalFn
+	pendding?: (schedule?: number) => any
 	completed?: (message?: Shedule) => any
 	errorFn?: normalFn
 }

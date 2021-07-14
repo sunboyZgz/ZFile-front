@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<a :href="github" class="block relative left-2">
+		<a :href="github" class="block relative left-2 w-18 h-18">
 			<img src="../../assets/logo.png" class="w-20" />
 		</a>
 		<Menu :mode="MenuMode.VERTICAL" class="ml-6 mt-8">
@@ -10,39 +10,38 @@
 				</div>
 			</MenuItem>
 			<MenuItem>
-				<div class="nav-btn relative overflow-hidden">
-					<input
-						class="absolute z-1 block h-full bg-transparent text-transparent cursor-pointer"
-						type="file"
-						multiple
-						title="folder-add"
-						webkitdirectory
-						ref="folderAddRef"
-						@change="uploadFolder"
+				<FolderAdd class="nav-btn relative cursor-pointer overflow-hidden" />
+			</MenuItem>
+			<MenuItem>
+				<FileAdd class="nav-btn relative cursor-pointer overflow-hidden" />
+			</MenuItem>
+			<MenuItem>
+				<div class="nav-btn">
+					<AliIcon
+						class="icon dark:text-true-gray-200 !text-xl"
+						code="exit"
+						:title="t('tablle.leftnav.sign-out')"
+						@click="toSignOut"
 					/>
-					<AliIcon class="relative icon dark:text-true-gray-200 !text-xl" code="folder-add" /></div
-			></MenuItem>
+				</div>
+			</MenuItem>
 		</Menu>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, Ref, ref, onMounted, onUnmounted } from 'vue'
+import { defineComponent, PropType, toRef, computed, ComputedRef } from 'vue'
 import { Menu, MenuItem, AliIcon } from '/@/components/'
+import FolderAdd from './FolderAdd.vue'
+import FileAdd from './FileAdd.vue'
 import { MenuMode } from '/@/components/easy-menu/_utils'
 import { useFullscreen } from '@vueuse/core'
-import { uploadDir, showUpload } from '/@/network/main'
-import { useNotification } from 'naive-ui'
-
+import { signOut } from '/@/network/main'
+import { isUsefulReq } from '/@/network/_utils'
+import { useRouter } from 'vue-router'
+import type { NavItem } from '../Main.vue'
+import { useTypeI18n } from '/@/i18n'
 const github = import.meta.env.VITE_GITHUB
-export interface NavItem {
-	code?: string
-	activeCode?: string
-	key?: number
-	active?: boolean | Ref<boolean>
-	title?: string
-	click?: (e: MouseEvent) => void
-}
 
 export default defineComponent({
 	name: 'LeftMenu',
@@ -50,81 +49,73 @@ export default defineComponent({
 		Menu,
 		MenuItem,
 		AliIcon,
+		FolderAdd,
+		FileAdd,
 	},
 	props: {
-		ref: {
-			type: Object as PropType<HTMLDivElement>,
+		dom: {
+			type: Object as PropType<HTMLDivElement | null>,
 			default: null,
 		},
 	},
 	setup(props) {
-		const { isFullscreen, enter } = useFullscreen(props.ref)
-		const folderAddRef = ref<HTMLDivElement | null>(null)
-		const notification = useNotification()
-		const navItems: NavItem[] = [
-			{
-				code: 'quanping',
-				activeCode: 'xiaoping',
-				active: isFullscreen,
-				key: 1,
-				title: 'fullscreen',
-				click: () => {
-					enter()
-				},
-			},
-			{
-				code: 'file-add',
-				key: 3,
-				title: 'file add',
-			},
-			{
-				code: 'xiazai',
-				key: 4,
-				title: 'download',
-			},
-			{
-				code: 'lianjie',
-				key: 5,
-				title: 'link',
-			},
-		]
-		const start = () => {
-			notification.info({
-				content: 'progress',
-				meta: '想不出来',
-			})
-		}
-		const uploadFolder = async e => {
-			let formData = new FormData()
-			console.log(e)
-			const files = e.target?.files
-			// console.log(files)
-			for (let i = 0; i < files.length; i++) {
-				formData.append('files', files[i], files[i].webkitRelativePath)
+		const dom = toRef(props, 'dom')
+		const { isFullscreen, enter } = useFullscreen(dom)
+		const router = useRouter()
+		const { t } = useTypeI18n()
+		const navItems: ComputedRef<(NavItem & { click?: (e: MouseEvent) => void })[]> = computed(
+			() => {
+				const fullscreen = t('tablle.leftnav.fullScreen')
+				const download = t('tablle.leftnav.download')
+				return [
+					{
+						code: 'quanping',
+						activeCode: 'xiaoping',
+						active: isFullscreen,
+						key: 1,
+						title: fullscreen,
+						click: () => {
+							enter()
+						},
+					},
+					{
+						code: 'xiazai',
+						key: 4,
+						title: download,
+					},
+				]
 			}
-			start()
-			// uploadDir(formData)
-			// await showUpload({
-			// 	start,
-			// })
-			e.target.files = {}
-			// console.log('formData', formData)
+		)
+		const toSignOut = async () => {
+			const { status } = await signOut()
+			if (isUsefulReq(status)) {
+				router.push('/login')
+			}
 		}
-		onMounted(() => {
-			folderAddRef.value?.addEventListener('change', uploadFolder)
-		})
-		onUnmounted(() => {
-			folderAddRef.value?.removeEventListener('change', uploadFolder)
-		})
 		return {
 			MenuMode,
 			navItems,
 			github,
-			folderAddRef,
-			uploadFolder,
+			toSignOut,
+			t,
 		}
 	},
 })
 </script>
-
-<style></style>
+<style lang="scss">
+.nav-btn {
+	width: 2.5rem;
+	border-radius: 9999px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 2.5rem;
+	&:hover {
+		cursor: pointer;
+		background-color: rgb(83, 77, 184);
+		.icon {
+			color: white;
+		}
+	}
+}
+</style>

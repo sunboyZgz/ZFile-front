@@ -3,9 +3,9 @@ import { baseRoutes } from './routes/base'
 // import { initialUser } from '/@/network/install'
 
 const routes = baseRoutes
-
+//import.meta.env.PROD ? import.meta.env.VITE_PUBLIC_PATH :
 const router = createRouter({
-	history: createWebHistory(import.meta.env.VITE_PUBLIC_PATH || '/'),
+	history: createWebHistory('/zfile'),
 	routes,
 })
 

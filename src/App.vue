@@ -34,6 +34,9 @@ export default defineComponent({
 				} else {
 					smallScreen.value = false
 				}
+			},
+			{
+				immediate: true,
 			}
 		)
 

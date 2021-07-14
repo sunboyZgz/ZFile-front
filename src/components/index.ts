@@ -8,3 +8,4 @@ export { default as SunSwitch } from './switch'
 export const ToggleMode = createAsyncComponent(() => import('./ToggleMode.vue'))
 export const Translate = createAsyncComponent(() => import('./Translate.vue'))
 export { Breadcrumb, BreadItem } from './breadcrumb'
+export { default as Editor } from './editor'

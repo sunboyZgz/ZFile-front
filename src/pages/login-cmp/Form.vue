@@ -43,8 +43,15 @@
 				/>
 			</div>
 		</n-form-item>
-		<n-button class="w-full enter_xleft-3" attr-type="button" type="info" @click="clickLogin">
-			{{ t('lg_button') }}
+		<n-button
+			class="w-full enter_xleft-3"
+			attr-type="button"
+			type="info"
+			@click="clickLogin"
+			:disabled="loading"
+		>
+			<span v-if="!loading">{{ t('lg_button') }}</span>
+			<n-spin v-else class="text-white" size="small" />
 		</n-button>
 	</n-form>
 </template>
@@ -59,10 +66,6 @@ import { loginUser } from '/@/network/login'
 import { isUsefulReq } from '/@/network/_utils'
 import { debounce } from '/@/utils/common'
 import { useRouter } from 'vue-router'
-// interface FormValue {
-// 	user: string
-// 	pw: string
-// }
 
 export default defineComponent({
 	name: 'LoginForm',
@@ -73,6 +76,7 @@ export default defineComponent({
 		const { t } = useTypeI18n()
 		const isSmall = useSmallSize()
 		const showPw = ref(true)
+		const loading = ref(false)
 		const labelStyle = computed(() => ({
 			color: isSmall.value ? 'white' : '',
 		}))
@@ -94,7 +98,7 @@ export default defineComponent({
 				},
 				cipher: {
 					required: true,
-					message: '请输入年龄',
+					message: '请输入密码',
 					trigger: 'blur',
 				},
 			},
@@ -105,7 +109,10 @@ export default defineComponent({
 				e.preventDefault()
 				formRef.value?.validate(async errors => {
 					if (!errors) {
-						const { status, message: info } = await loginUser(formValue.value.user)
+						loading.value = true
+						const { status, message: info } = await loginUser(formValue.value.user).finally(() => {
+							loading.value = false
+						})
 						if (isUsefulReq(status)) {
 							router.push('/main')
 						} else {
@@ -134,6 +141,7 @@ export default defineComponent({
 			showPw,
 			changePwStat,
 			clickLogin,
+			loading,
 		}
 	},
 })

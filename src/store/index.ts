@@ -1,5 +1,7 @@
 import { createStore, useStore } from 'vuex'
 import themeModule from './modules/themeMode'
+import fileSys from './modules/fileSys'
+
 export interface RootModuleType {
 	_: unknown
 }
@@ -7,6 +9,7 @@ export interface RootModuleType {
 const store = createStore({
 	modules: {
 		themeModule,
+		fileSys,
 	},
 })
 //eslint-disable-next-line

@@ -5,5 +5,7 @@ export interface Fn<T = any, R = T> {
 }
 
 export type MergeShallow<T = Record<string, any>, V = Record<string, any>> = {
-	[K in keyof V | keyof T]: K extends keyof V ? V[K] : T[K]
+	[K in keyof V | keyof T]: K extends keyof V ? Exclude<V[K], undefined> : Exclude<T[K], undefined>
 }
+
+export type StringLiteralUnion<T extends U, U = string> = T | (U & {})

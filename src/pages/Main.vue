@@ -13,41 +13,67 @@
 		"
 	>
 		<n-notification-provider>
-			<LeftMenu class="min-w-[4rem] h-screen overflow-hidden" :ref="fullRef ?? undefined" />
+			<!-- left side nav -->
+			<LeftMenu class="hidden lg:block min-w-[5rem] h-screen overflow-hidden" :dom="fullRef" />
+			<!-- full screen area -->
 			<div
 				class="w-full h-screen"
-				ref="fullRef"
 				:class="{ 'bg-blue-50 dark:bg-gray-800': isFullscreen }"
+				ref="fullRef"
 			>
+				<n-modal :show="showModal">
+					<n-spin class="bg-transparent text-blue-400 shadow-none" size="large" />
+				</n-modal>
+				<!-- file history for back and push  -->
 				<nav class="h-[4.5rem] w-full flex items-center overflow-hidden">
 					<div class="flex items-center flex-1 text-left ml-8">
-						<AliIcon
-							v-for="item in fileHistory"
-							class="
-								icon
-								cursor-pointer
-								!text-xl
-								!inline-block
-								font-bold
-								align-bottom
-								text-warm-gray-500
-								hover:text-warm-gray-900
-								dark:text-true-gray-200 dark:text-true-gray-50
-								transform-gpu
-								transition-all
-								hover:scale-110
-							"
-							:code="item.code"
-							:key="item.key"
-						/>
+						<template v-if="!smallScreen">
+							<AliIcon
+								v-for="item in fileHistory"
+								class="
+									icon
+									cursor-pointer
+									!text-xl
+									!inline-block
+									font-bold
+									align-bottom
+									text-warm-gray-500
+									hover:text-warm-gray-900
+									dark:text-true-gray-200 dark:text-true-gray-50
+									transform-gpu
+									transition-all
+									hover:scale-110
+								"
+								@click="item.click"
+								:code="item.code"
+								:key="item.key"
+							/>
+						</template>
+						<template v-else>
+							<n-button @click="openDrawer">右</n-button>
+							<n-drawer v-model:show="active" :width="200">
+								<n-drawer-content title="斯通纳">
+									《斯通纳》是美国作家约翰·威廉姆斯在 1965 年出版的小说。
+								</n-drawer-content>
+							</n-drawer>
+						</template>
+						<!-- header back and go in-->
 						<Breadcrumb class="ml-4">
 							<!-- <template #separator> <div>test</div> </template> -->
-							<BreadItem class="dark:text-true-gray-200" />
-							<BreadItem class="dark:text-true-gray-200" />
-							<BreadItem class="dark:text-true-gray-200" />
+							<template v-for="(item, index) in pathRef" :key="item">
+								<BreadItem class="dark:text-true-gray-200">
+									<router-link
+										v-if="index < pathRef.length - 1"
+										:to="baseUrl + pathRef.slice(0, index + 1).join('/')"
+										>{{ item }}</router-link
+									>
+									<template v-else>{{ item }}</template>
+								</BreadItem>
+							</template>
 						</Breadcrumb>
 					</div>
-					<div class="flex-1 text-right flex justify-end items-center pr-8">
+					<!-- top-right control button -->
+					<div class="flex-1 text-right flex justify-end items-center pr-2 lg:pr-8">
 						<AliIcon
 							v-if="isFullscreen"
 							code="xiaoping"
@@ -62,44 +88,17 @@
 							"
 							@click="exit"
 						/>
-						<ToggleMode class="mr-8" />
+						<ToggleMode class="pr-2 lg:mr-8" />
 						<Translate />
 					</div>
 				</nav>
-				<div class="file-main w-full pb-2 pl-6">
-					<!-- <div
-					ref="clickRef"
-					class="file-body w-full h-full rounded-tl-3xl bg-white overflow-scroll overflow-x-hidden"
-				> -->
-					<v-contextmenu ref="contextmenu">
-						<v-contextmenu-item>创建文件夹</v-contextmenu-item>
-						<v-contextmenu-divider />
-						<v-contextmenu-item>创建文件</v-contextmenu-item>
-						<v-contextmenu-divider />
-						<v-contextmenu-item>刷新</v-contextmenu-item>
-					</v-contextmenu>
-
-					<div
-						class="
-							file-body
-							w-full
-							h-full
-							overflow-scroll overflow-x-hidden
-							sun-scroll
-							dark:bg-gray-700
-							transition-colors
-							rounded-tl-3xl
-							bg-white
-						"
-						v-contextmenu:contextmenu
-					>
-						<FileTable />
+				<div class="file-main w-full pb-2 pl-0 lg:pl-6">
+					<div class="file-body w-full h-full rounded-0 lg:rounded-tl-3xl overflow-hidden">
+						<FileTable
+							class="transition-colors bg-white dark:bg-gray-700 overflow-hidden"
+							:file-list="fileList"
+						/>
 					</div>
-					<!-- <div class="relative z-3 table-container overflow-scroll overflow-x-hidden sun-scroll">
-					<FileTable />
-				</div>
-				<div class="h-12"></div> -->
-					<!-- </div> -->
 				</div>
 			</div>
 		</n-notification-provider>
@@ -107,20 +106,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref } from 'vue'
+import { defineComponent, Ref, ref, watch, unref, computed, inject } from 'vue'
 import LeftMenu from './main-cmp/LeftMenu.vue'
 import FileTable from './main-cmp/FileTable.vue'
 import { AliIcon, Translate, ToggleMode, Breadcrumb, BreadItem } from '/@/components/'
 import { useFullscreen } from '@vueuse/core'
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import { useMessage } from 'naive-ui'
+import { key } from '/@/components/context/'
+import { dropBaseUrl } from '/@/router/_utils'
 export interface NavItem {
 	code?: string
 	activeCode?: string
 	key?: number
 	active?: boolean | Ref<boolean>
 	title?: string
-	click?: (e: MouseEvent) => void
 }
-
 export default defineComponent({
 	name: 'Main',
 	components: {
@@ -134,16 +136,60 @@ export default defineComponent({
 	},
 	setup() {
 		const fullRef = ref<HTMLDivElement | null>(null)!
+		const showModal = ref(false)
+		const active = ref(false)
+		const router = useRouter()
+		const store = useStore()
 		const { isFullscreen, exit } = useFullscreen(fullRef)
+		const pathRef = ref<string[]>([])
+		const fileList = computed(() => store.getters['fileSys/curDirGetter'])
+		const message = useMessage()
+		const smallScreen = computed(() => inject(key)?.smallScreen)
 
-		const fileHistory: NavItem[] = [
+		watch(
+			() => router.currentRoute.value.path,
+			async () => {
+				showModal.value = true
+				const [_, messageInfo] = await store
+					.dispatch('fileSys/checkDirAction', dropBaseUrl(router.currentRoute.value.path))
+					.catch(err => {
+						console.error(err)
+						message.error(messageInfo)
+					})
+					.finally(() => {
+						showModal.value = false
+					})
+				let rawpath = unref(router.currentRoute).params.path
+				rawpath = rawpath === '' ? '/' : rawpath
+				const paths = typeof rawpath === 'string' ? [rawpath] : rawpath
+				pathRef.value = paths
+			},
+			{
+				immediate: true,
+			}
+		)
+		const push = () => {
+			router.forward()
+		}
+		const back = () => {
+			if (/^\/main(\/)?$/.test(router.currentRoute.value.path)) {
+				return
+			}
+			router.back()
+		}
+		const openDrawer = () => {
+			active.value = true
+		}
+		const fileHistory: (NavItem & { click: (e: MouseEvent) => void })[] = [
 			{
 				code: 'left',
 				key: 6,
+				click: back,
 			},
 			{
 				code: 'right',
 				key: 7,
+				click: push,
 			},
 		]
 
@@ -153,6 +199,13 @@ export default defineComponent({
 			fileHistory,
 			BreadItem,
 			exit,
+			pathRef,
+			baseUrl: '/main/',
+			fileList,
+			showModal,
+			smallScreen,
+			active,
+			openDrawer,
 		}
 	},
 })
@@ -165,20 +218,7 @@ export default defineComponent({
 .file-body {
 	box-shadow: -1px -1px 3px 0px rgba($color: #2b2b2b, $alpha: 0.1);
 }
-.nav-btn {
-	width: 2.5rem;
-	border-radius: 9999px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 2.5rem;
-	&:hover {
-		background-color: rgb(83, 77, 184);
-		.icon {
-			color: white;
-		}
-	}
-}
+
 // .table-container {
 // 	max-height: calc(100% - 3rem);
 // }

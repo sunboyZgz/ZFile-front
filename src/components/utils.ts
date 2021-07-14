@@ -1,5 +1,4 @@
 import { isObject } from '/@/utils/common'
-import { VNodeTypes } from 'vue'
 export const getPropSlots = (slots, props, prop = 'default') => {
 	return slots[prop]?.() ?? props[prop]
 }
@@ -12,6 +11,13 @@ export const cleanComments = (vnodes: any[], type: string) => {
 	for (let i = 0; i < vnodes.length; i++) {
 		if (vnodes[i].type[type]) {
 			arr.push(vnodes[i])
+		} else if (vnodes[i].children && Array.isArray(vnodes[i].children)) {
+			const ok = vnodes[i].children.every(item => {
+				return item.type[type]
+			})
+			if (ok) {
+				arr.push(vnodes[i])
+			}
 		}
 	}
 	return arr
@@ -48,4 +54,26 @@ export const concatItem = <T>(vnodes: T[], separator: any) => {
 		arr.push(head)
 	}
 	return arr
+}
+/**
+ * @description easy smooth the vnode.children
+ */
+export const easySmooth = (vnode: any[]) => {
+	const arr: any[] = []
+	for (let i = 0; i < vnode.length; i++) {
+		if (vnode[i].children) {
+			arr.push(...vnode[i].children)
+		} else {
+			arr.push(vnode)
+		}
+	}
+	return arr
+}
+
+/**
+ * @description to support teleport built-in component
+ */
+export const toBody = (dom: HTMLElement, id: string) => {
+	dom.id = id
+	document.body.appendChild(dom)
 }

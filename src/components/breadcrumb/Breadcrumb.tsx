@@ -1,18 +1,7 @@
-import {
-	defineComponent,
-	onMounted,
-	nextTick,
-	InjectionKey,
-	PropType,
-	ref,
-	h,
-	createVNode,
-} from 'vue'
+import { defineComponent, ref } from 'vue'
 import './index.scss'
-import { getPropSlots, cleanComments, checkItem, concatItem } from '../utils'
-import { isObject } from '/@/utils/common'
+import { getPropSlots, cleanComments, checkItem, easySmooth } from '../utils'
 import { PREFIXER } from '/@/utils/env'
-import { createContext } from '/@/hooks/useContext'
 
 const breadProps = {
 	separator: {
@@ -28,30 +17,37 @@ export default defineComponent({
 	setup(props, { slots }) {
 		const prefixer = `${PREFIXER}-breadcrumb`
 		const showSlots = ref(true)
-		// createContext(key, { items: [] }, { readonly: false })
-		let vnode = getPropSlots(slots, props)
-		vnode = cleanComments(vnode, '__SUN_BREADCRUMB_ITEM')
-		// console.log('vnode', vnode)
-		if (!checkItem(vnode, '__SUN_BREADCRUMB_ITEM')) {
-			console.error('breadcrumb can only wrap breaditem')
-			showSlots.value = false
-			return () => {}
-		}
-		let s = getPropSlots(slots, props, 'separator')[0]
-		typeof s === 'string' &&
-			(s = createVNode(
-				'span',
-				{
-					class: `${prefixer}-separator dark:text-white`,
-				},
-				s
-			))
-		// console.log('s:', s)
-		const items = concatItem(vnode, s)
-		// console.log('items:', items)
-
 		return () => {
-			return <div class={[prefixer]}>{items}</div>
+			let vnode = getPropSlots(slots, props)
+
+			vnode = cleanComments(vnode, '__SUN_BREADCRUMB_ITEM')
+			vnode = easySmooth(vnode)
+			if (!checkItem(vnode, '__SUN_BREADCRUMB_ITEM')) {
+				console.error('breadcrumb can only wrap breaditem')
+				showSlots.value = false
+				return () => {}
+			}
+			const s = getPropSlots(slots, props, 'separator')[0]
+
+			const renderSeparator = () => {
+				return typeof s === 'string' ? <span class='dark:text-gray-400'>{s}</span> : s
+			}
+			return (
+				<div class={[prefixer]}>
+					{vnode.map((element, index) => {
+						if (index < vnode.length - 1) {
+							return (
+								<>
+									{element}
+									{renderSeparator()}
+								</>
+							)
+						} else {
+							return <>{element}</>
+						}
+					})}
+				</div>
+			)
 		}
 	},
 })
