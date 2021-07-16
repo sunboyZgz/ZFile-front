@@ -1,6 +1,15 @@
 const zh = {
 	loginpage: '登录',
 	installpage: '启动',
+	installform: {
+		nickname: '昵称',
+		email: '邮箱',
+		vericode: '验证码',
+		getcode: '获取',
+		pleasepw: '请输入密码',
+		repw: '再次输入密码',
+		comfirm: '注册',
+	},
 	mainpage: '主页',
 	login: '登录',
 	account: {

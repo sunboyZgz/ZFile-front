@@ -4,14 +4,6 @@ h4 {
 	margin: 0;
 }
 
-.mask {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: rgba(0, 0, 0, 0.3);
-}
 .red {
 	background-color: red;
 }
@@ -22,10 +14,12 @@ h4 {
 .yellow {
 	background-color: rgb(255, 208, 0);
 }
-
+.hidden-scroll::-webkit-scrollbar {
+	display: none;
+}
 .#{$prefixer} {
 	position: absolute;
-	z-index: 999;
+	z-index: 10;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
@@ -71,5 +65,29 @@ h4 {
 	padding: 0.5rem 1rem 0 1rem;
 	line-height: 1.2;
 	min-height: 40rem;
+	max-height: 40rem;
 	height: 100%;
+	overflow: scroll;
+}
+
+.#{$prefixer}-addition {
+	position: absolute;
+	display: flex;
+	bottom: 2rem;
+	right: 2rem;
+	z-index: 10;
+	& > * {
+		flex-grow: 0;
+		flex-shrink: 0;
+	}
+}
+
+.#{$prefixer}-fade-enter-active,
+.#{$prefixer}-fade-leave-active {
+	transition: opacity 0.3s ease-in-out;
+}
+
+.#{$prefixer}-fade-enter-from,
+.#{$prefixer}-fade-leave-to {
+	opacity: 0;
 }

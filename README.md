@@ -18,7 +18,7 @@
 - [vite-plugin-style-import](https://github.com/anncwb/vite-plugin-style-import/tree/main#readme)
 - [vite-plugin-html](https://github.com/anncwb/vite-plugin-html/blob/main/src/injectHtml.ts)：`index.html`模板变量工具
 
-#### tech stack
+#### tech tools
 
 - [windicss](https://windicss.org/)
 - [vue3](https://v3.cn.vuejs.org/)
@@ -29,6 +29,7 @@
 - [sass](https://sass-lang.com/)
 - [vueuse](https://github.com/vueuse/vueuse)
 - [axios](https://axios-http.com/zh/docs/intro)
+- [codemirror](https://github.com/codemirror/CodeMirror)
 
 #### 前端功能实现
 
@@ -48,6 +49,8 @@
 - [x] 创建文件
 - [x] 删除 文件/文件夹
 - [x] 上传 文件/文件目录
-- [ ] 打开文件
+- [x] 打开文件
+- [x] 简单编辑文件
+- [x] 打开图片
 - [ ] 展示上传文件的进度（暂时未完成调用后端接口）
 - [ ] 清空上传文件的进度（需要与上传文件的进度一同优化）

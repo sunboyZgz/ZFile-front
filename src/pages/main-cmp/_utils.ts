@@ -113,7 +113,7 @@ map.set('php', 'php')
 map.set('html', 'htmlmixed')
 map.set('css', 'css')
 map.set('java', 'text/x-java')
-
+map.set('md', 'markdown')
 /**
  * @description use the ext of filename sush as .ts to decide the mode of file, now don't consider the .d.ts
  */

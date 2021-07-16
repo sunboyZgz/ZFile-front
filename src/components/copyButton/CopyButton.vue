@@ -1,9 +1,7 @@
 <template>
-	<transition name="fade">
-		<button v-show="show" class="sun-copy" @click="copyClick">
-			{{ copied ? 'copyed' : 'copy' }}
-		</button>
-	</transition>
+	<button class="sun-copy" @click="copyClick">
+		{{ copied ? 'copyed' : 'copy' }}
+	</button>
 </template>
 
 <script lang="ts">
@@ -16,15 +14,11 @@ export default defineComponent({
 			type: String,
 			default: '',
 		},
-		show: {
-			type: Boolean,
-			default: true,
-		},
 	},
 	setup(props) {
 		const contentRef = toRef(props, 'content')
 		const { copied, copy } = useClipboard({
-			source: contentRef.value,
+			source: contentRef,
 			copiedDuring: 3000,
 		})
 
