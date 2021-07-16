@@ -152,13 +152,6 @@ export default defineComponent({
 		const { t, locale } = useTypeI18n()
 		const handleSelect = useI18Select(locale)
 		const isSmall = useSmallSize()
-
-		// const [width, height] = useResize()
-		// const rate = computed(() => height / width)
-		// const screenSize = inject(key)
-		// watchEffect(() => {
-		// 	isSmall.value = unref(false || screenSize!.smallScreen)
-		// })
 		return {
 			t,
 			isSmall,

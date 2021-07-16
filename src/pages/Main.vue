@@ -108,7 +108,6 @@
 <script lang="ts">
 import { defineComponent, Ref, ref, watch, unref, computed, inject } from 'vue'
 import LeftMenu from './main-cmp/LeftMenu.vue'
-import FileTable from './main-cmp/FileTable.vue'
 import { AliIcon, Translate, ToggleMode, Breadcrumb, BreadItem } from '/@/components/'
 import { useFullscreen } from '@vueuse/core'
 import { useRouter } from 'vue-router'
@@ -116,6 +115,7 @@ import { useStore } from 'vuex'
 import { useMessage } from 'naive-ui'
 import { key } from '/@/components/context/'
 import { dropBaseUrl } from '/@/router/_utils'
+import FileTable from './main-cmp/FileTable.vue'
 export interface NavItem {
 	code?: string
 	activeCode?: string
@@ -218,8 +218,4 @@ export default defineComponent({
 .file-body {
 	box-shadow: -1px -1px 3px 0px rgba($color: #2b2b2b, $alpha: 0.1);
 }
-
-// .table-container {
-// 	max-height: calc(100% - 3rem);
-// }
 </style>

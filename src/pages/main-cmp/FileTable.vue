@@ -4,15 +4,36 @@
 	</n-modal>
 	<!-- file editor -->
 	<teleport to="#sun-cm">
-		<div class="mask" v-show="editorInfo.isShow"></div>
-		<Editor
-			v-model:active="editorInfo.isShow"
-			v-model:editor-value="editorInfo.editorValue"
-			:file-title="editorInfo.fileTitle"
-			:mode="editorInfo.mode"
-			v-if="editorInfo.isShow"
-		/>
+		<div class="mask" v-show="editorInfo.isShow">
+			<Editor
+				v-model:active="editorInfo.isShow"
+				v-model:editor-value="editorInfo.editorValue"
+				:file-title="editorInfo.fileTitle"
+				:mode="editorInfo.mode"
+				:onsave="writeFile"
+				v-if="editorInfo.isShow"
+			>
+				<template #addition>
+					<button
+						class="
+							block
+							text-white
+							min-w-[4.6rem]
+							ml-4
+							rounded-md
+							border-light-50 border-1
+							bg-[#302d2d]
+						"
+						@click="writeFile"
+					>
+						save
+					</button>
+				</template>
+			</Editor>
+		</div>
 	</teleport>
+	<!-- pic preview-->
+	<Preview v-model:show="imgPre.active" :pic-list="imgPre.src" />
 	<!-- table header right click -->
 	<v-contextmenu ref="controlRef">
 		<v-contextmenu-item
@@ -44,8 +65,6 @@
 		<v-contextmenu-item class="text-center" @click="deleteDir">删除</v-contextmenu-item>
 		<v-contextmenu-divider />
 		<v-contextmenu-item class="text-center" @click="downLoad">下载</v-contextmenu-item>
-		<v-contextmenu-divider />
-		<v-contextmenu-item class="text-center">生成直链</v-contextmenu-item>
 	</v-contextmenu>
 	<div class="file-table" :class="$attrs.class">
 		<div
@@ -132,16 +151,16 @@ import { useTypeI18n } from '/@/i18n/'
 import { useMessage } from 'naive-ui'
 import type { fileDetail } from '/@/store/modules/fileSys'
 import { makeEndofSlash, dropBaseUrl } from '/@/router/_utils'
-import { downLoadFile, read } from '/@/network/main'
+import { downLoadFile, read, write } from '/@/network/main'
 import { getFileMode } from './_utils'
 import type { FileType } from './_utils'
-import { Editor } from '/@/components/'
+import { Editor, Preview } from '/@/components/'
 import { toBody } from '/@/components/utils'
 import { isUsefulReq } from '/@/network/_utils'
 import { CodeModeType } from '/@/components/editor/type'
 
 toBody(document.createElement('div'), 'sun-cm')
-const audioReg = /^.*\.(png|jpe?g|webp|gif)$/
+const audioReg = /^.*\.(png|jpe?g|webp|gif)$/i
 interface EditerReactive {
 	mode: `text/${CodeModeType}`
 	editorValue: string
@@ -153,6 +172,7 @@ export default defineComponent({
 	components: {
 		FileTableItem,
 		Editor,
+		Preview,
 	},
 	inheritAttrs: false,
 	props: {
@@ -177,6 +197,10 @@ export default defineComponent({
 			mode: '',
 			fileTitle: '',
 			isShow: false,
+		})
+		const imgPre = reactive({
+			active: false,
+			src: [] as string[],
 		})
 		const message = useMessage()
 		const showModal = ref(false)
@@ -222,7 +246,10 @@ export default defineComponent({
 				if (curFile.fileType === 'Directory') {
 					router.push(makeEndofSlash(router.currentRoute.value.fullPath) + curFile.fileName)
 				} else if (audioReg.test(curFile.fileName!)) {
-					console.log('audio')
+					imgPre.active = true
+					imgPre.src = [
+						readImage(dropBaseUrl(router.currentRoute.value.fullPath) + curFile.fileName),
+					]
 				} else {
 					readFile()
 					editorInfo.isShow = true
@@ -243,12 +270,16 @@ export default defineComponent({
 			editorInfo.editorValue = text as string
 			editorInfo.mode = getFileMode(curFile.fileName)
 		}
+		const readImage = (filename: string) => {
+			return 'http://1.15.153.38:4799/zfile/file/readImage?filePath=' + filename
+		}
 		const openDir = () => {
 			const curFile = props.fileList && props.fileList[curFileRef.value]
 			if (curFile.fileType === 'Directory') {
 				router.push(makeEndofSlash(router.currentRoute.value.fullPath) + curFile.fileName)
 			} else if (audioReg.test(curFile.fileName!)) {
-				console.log('audio')
+				imgPre.active = true
+				imgPre.src = [readImage(dropBaseUrl(router.currentRoute.value.fullPath) + curFile.fileName)]
 			} else {
 				readFile()
 				editorInfo.isShow = true
@@ -261,9 +292,11 @@ export default defineComponent({
 			const result = await downLoadFile(
 				dropBaseUrl(router.currentRoute.value.path) + curFile.fileName
 			)
+
 			let aTag: null | HTMLAnchorElement = document.createElement('a')
-			aTag.href = URL.createObjectURL(result)
-			aTag.download = curFile?.fileName as string
+			const href = URL.createObjectURL(result)
+			aTag.href = href
+			aTag.download = (curFile?.fileName + (audioReg.test(curFile.fileName) ? '1' : '')) as string
 			aTag.click()
 			aTag = null
 		}
@@ -319,6 +352,16 @@ export default defineComponent({
 				message.success('refresh success')
 			}
 		}
+		const writeFile = async () => {
+			const curFile = props.fileList && props.fileList[curFileRef.value]
+			showModal.value = true
+			const { message: text } = await write({
+				filePath: dropBaseUrl(router.currentRoute.value.path) + curFile.fileName,
+				content: editorInfo.editorValue,
+			})
+			showModal.value = false
+			message.info(text as string)
+		}
 		onMounted(() => {
 			document.addEventListener('click', hideClick)
 			document.addEventListener('contextmenu', hideClick)
@@ -358,7 +401,9 @@ export default defineComponent({
 			blurToMkpath,
 			showModal,
 			refresh,
+			writeFile,
 			editorInfo,
+			imgPre,
 		}
 	},
 })

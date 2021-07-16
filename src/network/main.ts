@@ -153,12 +153,28 @@ export const remove = (params: RemoveInfo) => {
 		params,
 	})
 }
-
+/**
+ * @description only read the text type file
+ */
 export const read = (filePath: string) => {
 	return normalAxios.get({
 		url: 'file/read',
 		params: {
 			filePath,
 		},
+	})
+}
+
+/**
+ * @description modify and add file content
+ */
+interface WriteProps {
+	content: string
+	filePath: string
+}
+export const write = (data: WriteProps) => {
+	return normalAxios.post({
+		url: 'file/write',
+		data,
 	})
 }

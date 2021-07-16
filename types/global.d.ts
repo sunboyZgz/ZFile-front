@@ -8,6 +8,7 @@ declare global {
 		VITE_HTML_SMALL: boolean
 		VITE_GITHUB: string
 		VITE_BASE_URL: string
+		VITE_TIMEOUT: number
 	}
 	interface ImportMetaEnv extends ViteEnv {
 		__: unknown

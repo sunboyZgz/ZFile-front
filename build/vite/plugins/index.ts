@@ -13,7 +13,13 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean): VitePlugi
 		// configStyleImport(),
 	]
 
-	VITE_LEGACY && isBuild && vitePlugins.push(legacy())
+	VITE_LEGACY &&
+		isBuild &&
+		vitePlugins.push(
+			legacy({
+				targets: ['defaults', 'not IE 11'],
+			})
+		)
 	vitePlugins.push(configHtmlTemplate(viteEnv, VITE_HTML_SMALL))
 	return vitePlugins
 }

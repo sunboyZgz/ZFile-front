@@ -3,6 +3,25 @@
 		id="register"
 		class="min-w-screen min-h-screen overflow-hidden dark:bg-blue-gray-900 relative"
 	>
+		<div class="hidden lg:flex absolute top-4 right-0 pr-4 w-70 justify-evenly z-50">
+			<ToggleMode />
+
+			<a :href="github" target="_blank">
+				<GithubIcon
+					class="
+						rounded-full
+						border-2
+						shadow-md
+						border-gray-700
+						dark:border-white
+						cursor-pointer
+						dark:bg-white
+					"
+					width="28"
+				/>
+			</a>
+			<Translate />
+		</div>
 		<img class="absolute w-screen h-screen z-1" src="../assets/loading-bg.png" />
 		<a
 			class="
@@ -65,7 +84,7 @@
 									? '0 0 0 1px rgb(107, 196, 255)'
 									: '0 0 0 1px rgb(255, 255, 255)',
 							}"
-							placeholder="nickname"
+							:placeholder="t('installform.nickname')"
 							v-model:value="formValue.nickName"
 							@keydown.enter.prevent
 						/>
@@ -80,7 +99,7 @@
 									? '0 0 0 1px rgb(107, 196, 255)'
 									: '0 0 0 1px rgb(255, 255, 255)',
 							}"
-							placeholder="email"
+							:placeholder="t('installform.email')"
 							@keydown.enter.prevent
 							v-model:value="formValue.email"
 						/>
@@ -96,7 +115,7 @@
 								? '0 0 0 1px rgb(107, 196, 255)'
 								: '0 0 0 1px rgb(255, 255, 255)',
 						}"
-						placeholder="verification code"
+						:placeholder="t('installform.vericode')"
 						@keydown.enter.prevent
 						v-model:value="formValue.code"
 					/>
@@ -119,7 +138,7 @@
 						"
 						@click="debounce_code"
 					>
-						get code
+						{{ t('installform.getcode') }}
 					</button>
 				</n-form-item>
 				<n-form-item path="onePassword" class="-mt-4 lg:mt-0">
@@ -132,7 +151,7 @@
 								? '0 0 0 1px rgb(107, 196, 255)'
 								: '0 0 0 1px rgb(255, 255, 255)',
 						}"
-						placeholder="please input password"
+						:placeholder="t('installform.pleasepw')"
 						v-model:value="formValue.onePassword"
 						@keydown.enter.prevent
 						@input="throttle_pw"
@@ -151,15 +170,15 @@
 								: '0 0 0 1px rgb(255, 255, 255)',
 						}"
 						type="password"
-						placeholder="re-check input password"
+						:placeholder="t('installform.repw')"
 						v-model:value="formValue.twoPassword"
 						@keydown.enter.prevent
 					/>
 				</n-form-item>
 
-				<n-button class="w-full" attr-type="button" type="info" @click="handleValidateButton"
-					>confirm</n-button
-				>
+				<n-button class="w-full" attr-type="button" type="info" @click="handleValidateButton">{{
+					t('installform.comfirm')
+				}}</n-button>
 			</n-form>
 		</div>
 	</div>
@@ -175,6 +194,8 @@ import { key } from '/@/components/context/'
 import { throttle, debounce } from '/@/utils/common'
 import { getVeriCode, registerUser } from '/@/network/install'
 import { isUsefulReq } from '/@/network/_utils'
+import { Translate, ToggleMode, GithubIcon } from '/@/components/'
+import { useTypeI18n } from '/@/i18n'
 const github = import.meta.env.VITE_GITHUB
 const emailReg = /^[0-9a-zA-Z]+[\w._-|]+@[0-9a-zA-Z]+\.[a-z]{2,}$/
 
@@ -187,6 +208,9 @@ export default defineComponent({
 	name: 'Install',
 	components: {
 		Measure,
+		Translate,
+		ToggleMode,
+		GithubIcon,
 	},
 	setup() {
 		const smallScreen = inject(key)?.smallScreen
@@ -203,6 +227,7 @@ export default defineComponent({
 			twoPassword: '',
 		})
 		const message = useMessage()
+		const { t } = useTypeI18n()
 		const rules = {
 			email: [
 				{
@@ -254,9 +279,7 @@ export default defineComponent({
 			}
 			levelRef.value = value
 		}, 200)
-		// const inputPw = (e: string) => {
-		// 	thinput(e)
-		// }
+
 		const debounce_time = 5
 		const debounce_code = debounce(
 			async () => {
@@ -304,6 +327,7 @@ export default defineComponent({
 			debounce_code,
 			formRef,
 			handleValidateButton,
+			t,
 		}
 	},
 })

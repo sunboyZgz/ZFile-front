@@ -20,15 +20,6 @@ function resolveAlias(paths: Record<string, string[]>): AliasOptions {
 		replacement: pathResolve(paths[key][0].split('*').join('')) + '/',
 	}))
 	return alias
-
-	// const alias = {}
-	// Object.keys(paths).map(key => {
-	// 	const akey = key.slice(0, key.length - 1)
-	// 	const dir = paths[key][0].slice(0, paths[key][0].length - 1)
-	// 	alias[akey] = pathResolve(dir)
-	// })
-	// console.log(alias)
-	// return alias
 }
 
 export default ({ mode, command }: ConfigEnv): UserConfig => {
@@ -44,6 +35,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
 		base: VITE_PUBLIC_PATH,
 		root: ROOT,
 		server: {
+			open: '/zfile/index.html',
 			port: VITE_PORT,
 			proxy: isBuild
 				? undefined

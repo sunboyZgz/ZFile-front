@@ -10,7 +10,7 @@ export function configHtmlTemplate(
 			},
 		},
 		minify: isSmaller && {
-			minifyURLs: false,
+			minifyURLs: true,
 			removeAttributeQuotes: false,
 		},
 	})

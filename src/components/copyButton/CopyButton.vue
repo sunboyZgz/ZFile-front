@@ -1,9 +1,7 @@
 <template>
-	<transition name="fade">
-		<button v-show="show" class="sun-copy" @click="copyClick">
-			{{ copied ? 'copyed' : 'copy' }}
-		</button>
-	</transition>
+	<button class="sun-copy" @click="copyClick">
+		{{ copied ? 'copyed' : 'copy' }}
+	</button>
 </template>
 
 <script lang="ts">
@@ -15,10 +13,6 @@ export default defineComponent({
 		content: {
 			type: String,
 			default: '',
-		},
-		show: {
-			type: Boolean,
-			default: true,
 		},
 	},
 	setup(props) {

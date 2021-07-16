@@ -53,8 +53,14 @@
 			</div>
 		</div>
 		<!-- cm body -->
-		<div class="sun-cm-container" ref="editor" @mouseenter="moveInto" @mouseleave="moveLeave">
-			<copy-button class="border-light-50 border-1" :content="editorValue" :show="showButton" />
+		<div @mouseenter="moveInto" @mouseleave="moveLeave">
+			<div class="sun-cm-container hidden-scroll" ref="editor"></div>
+			<Transition name="sun-cm-fade">
+				<div class="sun-cm-addition" v-show="showButton">
+					<copy-button :content="editorValue" />
+					<slot name="addition"></slot>
+				</div>
+			</Transition>
 		</div>
 	</div>
 </template>
@@ -70,6 +76,7 @@ import 'codemirror/mode/javascript/javascript.js'
 import 'codemirror/mode/htmlmixed/htmlmixed.js'
 import 'codemirror/mode/php/php.js'
 import 'codemirror/mode/clike/clike.js'
+import 'codemirror/mode/markdown/markdown.js'
 import 'codemirror/mode/css/css.js'
 import { debounce } from '/@/utils/common'
 import CopyButton from '../copyButton'
@@ -118,6 +125,10 @@ export default defineComponent({
 			type: Function,
 			default: null,
 		},
+		onsave: {
+			type: Function,
+			default: null,
+		},
 		options: {
 			type: Object as PropType<CodeMirror.EditorConfiguration>,
 			default: () => {
@@ -131,7 +142,7 @@ export default defineComponent({
 	},
 	emits: ['update:active', 'update:editorValue'],
 	setup(props, { emit, attrs }) {
-		const { onOpen, onInput } = props
+		const { onOpen, onInput, onsave } = props
 		const fullRef = ref()
 		const showButton = ref(false)
 		const { enter, exit, isFullscreen } = useFullscreen(fullRef)
@@ -181,10 +192,15 @@ export default defineComponent({
 				...(attrs.style as object),
 			}
 		})
+		const save = cmInstance => {
+			onsave && onsave()
+		}
 		onMounted(async () => {
 			cmInstance = CodeMirror(editor.value, props.options)
 			cmInstance.setOption('mode', props.mode)
 			cmInstance.setOption('theme', 'material-darker')
+			cmInstance.addKeyMap({ 'Ctrl-S': save })
+			console.log('cmInstance', CodeMirror.keyNames)
 			cmInstance.setValue(props.editorValue)
 			cmInstance.on(
 				'change',
@@ -241,6 +257,6 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import './index.scss';
 </style>
