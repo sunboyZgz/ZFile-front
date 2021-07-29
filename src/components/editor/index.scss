@@ -17,17 +17,15 @@ h4 {
 .hidden-scroll::-webkit-scrollbar {
 	display: none;
 }
+
 .#{$prefixer} {
 	position: absolute;
 	z-index: 10;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	border-radius: 0.3rem;
 	overflow: hidden;
 	box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2), 2px 3px 3px 0 rgba(0, 0, 0, 0.2);
-	min-width: 20rem;
-	width: 50rem;
 }
 .#{$prefixer}-controlbar {
 	position: relative;
@@ -64,8 +62,6 @@ h4 {
 	background-color: $material-darker;
 	padding: 0.5rem 1rem 0 1rem;
 	line-height: 1.2;
-	min-height: 40rem;
-	max-height: 40rem;
 	height: 100%;
 	overflow: scroll;
 }
@@ -90,4 +86,30 @@ h4 {
 .#{$prefixer}-fade-enter-from,
 .#{$prefixer}-fade-leave-to {
 	opacity: 0;
+}
+
+@media screen and (min-width: 1024px) {
+	.#{$prefixer} {
+		min-width: 20rem;
+		width: 50rem;
+		border-radius: 0.3rem;
+	}
+	.#{$prefixer}-container {
+		min-height: 40rem;
+		max-height: 40rem;
+	}
+}
+@media screen and (max-width: 1024px) {
+	.#{$prefixer} {
+		min-width: 10rem;
+		width: 100%;
+		border-radius: 0;
+	}
+	.#{$prefixer}-btn:not(:nth-child(1)) {
+		display: none;
+	}
+	.#{$prefixer}-container {
+		min-height: calc(100vh - 2rem);
+		max-height: calc(100vh - 2rem);
+	}
 }

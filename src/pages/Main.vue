@@ -50,12 +50,12 @@
 							/>
 						</template>
 						<template v-else>
-							<!-- <n-button @click="openDrawer">右</n-button>
+							<n-button @click="openDrawer">右</n-button>
 							<n-drawer v-model:show="active" :width="200">
 								<n-drawer-content title="斯通纳">
 									《斯通纳》是美国作家约翰·威廉姆斯在 1965 年出版的小说。
 								</n-drawer-content>
-							</n-drawer> -->
+							</n-drawer>
 						</template>
 						<!-- header back and go in-->
 						<Breadcrumb class="ml-4">
