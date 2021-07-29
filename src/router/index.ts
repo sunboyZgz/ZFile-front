@@ -11,6 +11,7 @@ const router = createRouter({
 
 const whiteSet = new Set(['/main/'])
 router.beforeEach(async (to, from, next) => {
+	/*
 	if (to.path === '/install') {
 		//to the first redirect
 		const { message } = await initialUser()
@@ -32,6 +33,8 @@ router.beforeEach(async (to, from, next) => {
 			next()
 		}
 	}
+	*/
+	next()
 })
 
 export default router

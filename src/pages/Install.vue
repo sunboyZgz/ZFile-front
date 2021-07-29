@@ -3,9 +3,9 @@
 		id="register"
 		class="min-w-screen min-h-screen overflow-hidden dark:bg-blue-gray-900 relative"
 	>
+		<!-- large size screen -->
 		<div class="hidden lg:flex absolute top-4 right-0 pr-4 w-70 justify-evenly z-50">
 			<ToggleMode />
-
 			<a :href="github" target="_blank">
 				<GithubIcon
 					class="
@@ -21,6 +21,28 @@
 				/>
 			</a>
 			<Translate />
+		</div>
+		<div class="flow-root pt-2 px-3 mb-12">
+			<div class="float-left">
+				<ToggleMode />
+			</div>
+			<div class="float-right flex w-30 justify-evenly">
+				<a :href="github" target="_blank">
+					<GithubIcon
+						class="
+							rounded-full
+							border-2
+							shadow-md
+							border-gray-700
+							dark:border-white
+							cursor-pointer
+							dark:bg-white
+						"
+						width="28"
+					/>
+				</a>
+				<Translate />
+			</div>
 		</div>
 		<img class="absolute w-screen h-screen z-1" src="../assets/loading-bg.png" />
 		<a

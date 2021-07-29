@@ -50,16 +50,23 @@
 							/>
 						</template>
 						<template v-else>
-							<n-button @click="openDrawer">右</n-button>
+							<!-- <n-button @click="openDrawer">右</n-button>
 							<n-drawer v-model:show="active" :width="200">
 								<n-drawer-content title="斯通纳">
 									《斯通纳》是美国作家约翰·威廉姆斯在 1965 年出版的小说。
 								</n-drawer-content>
-							</n-drawer>
+							</n-drawer> -->
 						</template>
 						<!-- header back and go in-->
 						<Breadcrumb class="ml-4">
 							<!-- <template #separator> <div>test</div> </template> -->
+							<BreadItem
+								class="dark:text-true-gray-200"
+								:key="999"
+								v-if="pathRef && pathRef[0] !== '/'"
+							>
+								<router-link :to="baseUrl">root</router-link>
+							</BreadItem>
 							<template v-for="(item, index) in pathRef" :key="item">
 								<BreadItem class="dark:text-true-gray-200">
 									<router-link
@@ -67,7 +74,7 @@
 										:to="baseUrl + pathRef.slice(0, index + 1).join('/')"
 										>{{ item }}</router-link
 									>
-									<template v-else>{{ item }}</template>
+									<template v-else>{{ item === '/' ? 'root' : item }}</template>
 								</BreadItem>
 							</template>
 						</Breadcrumb>

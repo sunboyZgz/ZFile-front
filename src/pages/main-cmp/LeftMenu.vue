@@ -68,7 +68,7 @@ export default defineComponent({
 		const navItems: ComputedRef<(NavItem & { click?: (e: MouseEvent) => void })[]> = computed(
 			() => {
 				const fullscreen = t('tablle.leftnav.fullScreen')
-				const download = t('tablle.leftnav.download')
+				// const download = t('tablle.leftnav.download')
 				return [
 					{
 						code: 'quanping',
@@ -80,11 +80,11 @@ export default defineComponent({
 							enter()
 						},
 					},
-					{
-						code: 'xiazai',
-						key: 4,
-						title: download,
-					},
+					// {
+					// 	code: 'xiazai',
+					// 	key: 4,
+					// 	title: download,
+					// },
 				]
 			}
 		)

@@ -18,7 +18,7 @@
 						class="
 							block
 							text-white
-							min-w-[4.6rem]
+							min-w-[4.6rem] min-h-8
 							ml-4
 							rounded-md
 							border-light-50 border-1

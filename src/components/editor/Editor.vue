@@ -57,7 +57,7 @@
 			<div class="sun-cm-container hidden-scroll" ref="editor"></div>
 			<Transition name="sun-cm-fade">
 				<div class="sun-cm-addition" v-show="showButton">
-					<copy-button :content="editorValue" />
+					<!-- <copy-button :content="editorValue" /> -->
 					<slot name="addition"></slot>
 				</div>
 			</Transition>
@@ -79,7 +79,7 @@ import 'codemirror/mode/clike/clike.js'
 import 'codemirror/mode/markdown/markdown.js'
 import 'codemirror/mode/css/css.js'
 import { debounce } from '/@/utils/common'
-import CopyButton from '../copyButton'
+// import CopyButton from '../copyButton'
 import { AliIcon } from '../'
 const changeActive = (element: HTMLButtonElement | null, enter?: boolean) => {
 	if (!element) return
@@ -92,7 +92,7 @@ const changeActive = (element: HTMLButtonElement | null, enter?: boolean) => {
 export default defineComponent({
 	name: 'SunCodeMirror',
 	components: {
-		CopyButton,
+		// CopyButton,
 		AliIcon,
 	},
 	inheritAttrs: false,

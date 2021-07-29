@@ -58,11 +58,12 @@ export const concatItem = <T>(vnodes: T[], separator: any) => {
 /**
  * @description easy smooth the vnode.children
  */
-export const easySmooth = (vnode: any[]) => {
+export const easySmooth = (vnodes: any[]) => {
 	const arr: any[] = []
-	for (let i = 0; i < vnode.length; i++) {
-		if (vnode[i].children) {
-			arr.push(...vnode[i].children)
+	for (let i = 0; i < vnodes.length; i++) {
+		const vnode = vnodes[i]
+		if (vnode && Array.isArray(vnode.children)) {
+			arr.push(...vnodes[i].children)
 		} else {
 			arr.push(vnode)
 		}
