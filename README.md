@@ -54,3 +54,17 @@
 - [x] 打开图片
 - [ ] 展示上传文件的进度（暂时未完成调用后端接口）
 - [ ] 清空上传文件的进度（需要与上传文件的进度一同优化）
+
+#### 图片预览
+
+![](https://blog-zgz.oss-cn-hangzhou.aliyuncs.com/zfile/Snipaste_2021-07-30_13-46-30.png)
+
+![](https://blog-zgz.oss-cn-hangzhou.aliyuncs.com/zfile/Snipaste_2021-07-30_13-49-15.png)
+
+![](https://blog-zgz.oss-cn-hangzhou.aliyuncs.com/zfile/Snipaste_2021-07-30_13-50-12.png)
+
+![](https://blog-zgz.oss-cn-hangzhou.aliyuncs.com/zfile/Snipaste_2021-07-30_13-51-06.png)
+
+![](https://blog-zgz.oss-cn-hangzhou.aliyuncs.com/zfile/Snipaste_2021-07-30_13-51-24.png)
+
+![](https://blog-zgz.oss-cn-hangzhou.aliyuncs.com/zfile/Snipaste_2021-07-30_13-52-27.png)

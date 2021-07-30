@@ -97,6 +97,12 @@ $base_height--lg: 1.7rem;
 	white-space: nowrap;
 }
 
+.text-overflow {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
 .sun-scroll::-webkit-scrollbar {
 	width: 0.4rem;
 	background-color: rgba(209, 213, 219, 0.1);

@@ -23,6 +23,12 @@ const en: I18Message = {
 	},
 	lg_button: 'login',
 	title: 'manage server more efficiently',
+	profile: {
+		errorInfo: 'get user info error',
+		contentTitle: 'Profile',
+		nickname: 'nickname',
+		email: 'email',
+	},
 	tablle: {
 		header: {
 			name: 'name',

@@ -17,5 +17,3 @@ export default defineComponent({
 	name: 'TransIcon',
 })
 </script>
-
-<style></style>

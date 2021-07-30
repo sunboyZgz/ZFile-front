@@ -178,3 +178,18 @@ export const write = (data: WriteProps) => {
 		data,
 	})
 }
+
+export interface PropfileProps {
+	email: string
+	nickName: string
+	photo: string
+}
+/**
+ * @description: get user info
+ */
+type ProfileRes = MergeShallow<NormalRes, { message: PropfileProps }>
+export const show = () => {
+	return normalAxios.get<ProfileRes>({
+		url: 'user/show',
+	})
+}

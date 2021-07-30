@@ -19,6 +19,7 @@ import {
 	NModal,
 	NSpin,
 	NDrawer,
+	NDrawerContent,
 	NCheckbox,
 } from 'naive-ui'
 //dark mode
@@ -56,6 +57,7 @@ export function setupUI(app: App): void {
 			NModal,
 			NSpin,
 			NDrawer,
+			NDrawerContent,
 			NCheckbox,
 		],
 	})

@@ -22,6 +22,12 @@ const zh = {
 	},
 	lg_button: '登录',
 	title: '使你的服务器管理更高效',
+	profile: {
+		errorInfo: '获取用户信息失败',
+		contentTitle: '个人中心',
+		nickname: '昵称',
+		email: '邮箱',
+	},
 	tablle: {
 		header: {
 			name: '文件名',

@@ -49,13 +49,9 @@
 								:key="item.key"
 							/>
 						</template>
+						<!-- was only used in mobile -->
 						<template v-else>
-							<n-button @click="openDrawer">右</n-button>
-							<n-drawer v-model:show="active" :width="200">
-								<n-drawer-content title="斯通纳">
-									《斯通纳》是美国作家约翰·威廉姆斯在 1965 年出版的小说。
-								</n-drawer-content>
-							</n-drawer>
+							<Profile :user-info="userInfo" />
 						</template>
 						<!-- header back and go in-->
 						<Breadcrumb class="ml-4">
@@ -114,7 +110,6 @@
 
 <script lang="ts">
 import { defineComponent, Ref, ref, watch, unref, computed, inject } from 'vue'
-import LeftMenu from './main-cmp/LeftMenu.vue'
 import { AliIcon, Translate, ToggleMode, Breadcrumb, BreadItem } from '/@/components/'
 import { useFullscreen } from '@vueuse/core'
 import { useRouter } from 'vue-router'
@@ -122,7 +117,10 @@ import { useStore } from 'vuex'
 import { useMessage } from 'naive-ui'
 import { key } from '/@/components/context/'
 import { dropBaseUrl } from '/@/router/_utils'
-import FileTable from './main-cmp/FileTable.vue'
+import { LeftMenu, FileTable, Profile } from './main-cmp/'
+import { PropfileProps, show } from '/@/network/main'
+import { isUsefulReq } from '../network/_utils'
+import { useTypeI18n } from '/@/i18n/'
 export interface NavItem {
 	code?: string
 	activeCode?: string
@@ -140,19 +138,27 @@ export default defineComponent({
 		ToggleMode,
 		FileTable,
 		LeftMenu,
+		Profile,
 	},
 	setup() {
 		const fullRef = ref<HTMLDivElement | null>(null)!
 		const showModal = ref(false)
-		const active = ref(false)
+		const userInfo = ref<null | PropfileProps>(null)
 		const router = useRouter()
 		const store = useStore()
+		const { t } = useTypeI18n()
 		const { isFullscreen, exit } = useFullscreen(fullRef)
 		const pathRef = ref<string[]>([])
 		const fileList = computed(() => store.getters['fileSys/curDirGetter'])
 		const message = useMessage()
 		const smallScreen = computed(() => inject(key)?.smallScreen)
-
+		show().then(res => {
+			if (isUsefulReq(res.status)) {
+				userInfo.value = res.message
+			} else {
+				message.error(t('profile.errorInfo'))
+			}
+		})
 		watch(
 			() => router.currentRoute.value.path,
 			async () => {
@@ -184,9 +190,7 @@ export default defineComponent({
 			}
 			router.back()
 		}
-		const openDrawer = () => {
-			active.value = true
-		}
+
 		const fileHistory: (NavItem & { click: (e: MouseEvent) => void })[] = [
 			{
 				code: 'left',
@@ -211,8 +215,7 @@ export default defineComponent({
 			fileList,
 			showModal,
 			smallScreen,
-			active,
-			openDrawer,
+			userInfo,
 		}
 	},
 })

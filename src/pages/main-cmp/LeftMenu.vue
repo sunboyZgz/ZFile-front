@@ -42,6 +42,7 @@ import { useRouter } from 'vue-router'
 import type { NavItem } from '../Main.vue'
 import { useTypeI18n } from '/@/i18n'
 import { useMessage } from 'naive-ui'
+import { useSignout } from './_utils'
 const github = import.meta.env.VITE_GITHUB
 
 export default defineComponent({
@@ -88,15 +89,7 @@ export default defineComponent({
 				]
 			}
 		)
-		const toSignOut = async () => {
-			const { status, message: text } = await signOut()
-			if (isUsefulReq(status)) {
-				router.push('/login')
-			} else {
-				message.error(text as string)
-				router.push('/login')
-			}
-		}
+		const toSignOut = useSignout()
 		return {
 			MenuMode,
 			navItems,

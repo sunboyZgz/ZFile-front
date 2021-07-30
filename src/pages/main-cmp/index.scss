@@ -1,0 +1,21 @@
+/*
+profile component style
+*/
+.avatar-frame {
+	box-shadow: 0px 0px 1px 2px rgb(168, 162, 158);
+}
+.dark .avatar-frame {
+	box-shadow: 0px 0px 1px 2px rgb(30, 58, 138);
+}
+.nav-items {
+	background-color: rgba(229, 229, 229, 0.4);
+}
+.dark .nav-items {
+	background-color: rgba(229, 229, 229, 0.2);
+}
+.nav-items:active {
+	background-color: rgba(83, 77, 184, 0.8);
+}
+.dark .nav-items:active {
+	background-color: rgb(83, 77, 184);
+}

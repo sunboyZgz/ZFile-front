@@ -1,9 +1,11 @@
 import { watch, h, Ref, ref } from 'vue'
-import { useNotification, NProgress } from 'naive-ui'
+import { useNotification, NProgress, useMessage } from 'naive-ui'
 import { useRouter } from 'vue-router'
 import { StringLiteralUnion } from '/#/index'
 import { dropBaseUrl } from '/@/router/_utils'
 import { CodeModeType } from '/@/components/editor/type'
+import { signOut } from '/@/network/main'
+import { isUsefulReq } from '/@/network/_utils'
 export interface NoticeProps {
 	duration?: number
 	autoClose?: boolean
@@ -105,6 +107,23 @@ export function useDropBasePath() {
 		}
 	)
 	return result
+}
+
+/**
+ * @description signout feature
+ */
+export const useSignout = () => {
+	const router = useRouter()
+	const message = useMessage()
+	return async () => {
+		const { status, message: text } = await signOut()
+		if (isUsefulReq(status)) {
+			router.push('/login')
+		} else {
+			message.error(text as string)
+			router.push('/login')
+		}
+	}
 }
 
 export const map = new Map<FileType, CodeModeType>()
