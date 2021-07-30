@@ -36,12 +36,8 @@ import FolderAdd from './FolderAdd.vue'
 import FileAdd from './FileAdd.vue'
 import { MenuMode } from '/@/components/easy-menu/_utils'
 import { useFullscreen } from '@vueuse/core'
-import { signOut } from '/@/network/main'
-import { isUsefulReq } from '/@/network/_utils'
-import { useRouter } from 'vue-router'
 import type { NavItem } from '../Main.vue'
 import { useTypeI18n } from '/@/i18n'
-import { useMessage } from 'naive-ui'
 import { useSignout } from './_utils'
 const github = import.meta.env.VITE_GITHUB
 
@@ -62,9 +58,7 @@ export default defineComponent({
 	},
 	setup(props) {
 		const dom = toRef(props, 'dom')
-		const message = useMessage()
 		const { isFullscreen, enter } = useFullscreen(dom)
-		const router = useRouter()
 		const { t } = useTypeI18n()
 		const navItems: ComputedRef<(NavItem & { click?: (e: MouseEvent) => void })[]> = computed(
 			() => {
