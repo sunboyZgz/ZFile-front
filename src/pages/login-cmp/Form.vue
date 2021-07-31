@@ -7,6 +7,7 @@
 		:show-require-mark="false"
 		show-feedback
 		@submit.prevent
+		@keyup.enter="clickLogin"
 	>
 		<n-form-item
 			class="enter_xleft-1"

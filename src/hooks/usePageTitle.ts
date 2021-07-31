@@ -15,7 +15,7 @@ export function usePageTitle(): void {
 		() => {
 			const route = unref(currentRoute)
 			if (route.name === REDIRECT_NAME) return
-			const tTitle = t(route?.meta?.title as string)
+			const tTitle = t(`router.${route?.meta?.title as string}`)
 			pageTitle.value = tTitle ? ` ${tTitle} - ${title} ` : `${title}`
 		},
 		{ immediate: true }

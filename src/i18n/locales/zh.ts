@@ -1,6 +1,10 @@
 const zh = {
-	loginpage: '登录',
-	installpage: '启动',
+	router: {
+		loginpage: '登录',
+		installpage: '启动',
+		mainpage: '主页',
+		systempage: '系统',
+	},
 	installform: {
 		nickname: '昵称',
 		email: '邮箱',
@@ -10,7 +14,9 @@ const zh = {
 		repw: '再次输入密码',
 		comfirm: '注册',
 	},
-	mainpage: '主页',
+	navMenu: {
+		system: '系统',
+	},
 	login: '登录',
 	account: {
 		user: '账号',

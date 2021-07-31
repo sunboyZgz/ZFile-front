@@ -20,11 +20,11 @@ export enum dropDropKeys {
 export const options = [
 	{
 		label: '中文',
-		key: '1',
+		key: dropDropKeys.ZH,
 	},
 	{
 		label: 'English',
-		key: '2',
+		key: dropDropKeys.EN,
 	},
 ]
 

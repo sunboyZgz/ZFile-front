@@ -36,4 +36,19 @@ const MainRoute: RouteRecordRaw = {
 	},
 }
 
-export const baseRoutes = [RedirectRoute, LoginRoute, InstallRoute, MainRoute] as RouteRecordRaw[]
+const SystemRoute: RouteRecordRaw = {
+	path: '/system',
+	name: 'System',
+	component: () => import('/@/pages/System.vue'),
+	meta: {
+		title: 'systempage',
+	},
+}
+
+export const baseRoutes = [
+	RedirectRoute,
+	LoginRoute,
+	InstallRoute,
+	MainRoute,
+	SystemRoute,
+] as RouteRecordRaw[]

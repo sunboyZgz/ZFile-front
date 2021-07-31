@@ -1,7 +1,11 @@
 import type { I18Message } from '/#/i18n'
 const en: I18Message = {
-	loginpage: 'Login',
-	installpage: 'Install',
+	router: {
+		loginpage: 'Login',
+		installpage: 'Install',
+		mainpage: 'Main',
+		systempage: 'System',
+	},
 	installform: {
 		nickname: 'nickname',
 		email: 'email',
@@ -11,7 +15,9 @@ const en: I18Message = {
 		repw: 're-check input password',
 		comfirm: 'register',
 	},
-	mainpage: 'Main',
+	navMenu: {
+		system: 'System',
+	},
 	login: 'Login',
 	account: {
 		user: 'account',

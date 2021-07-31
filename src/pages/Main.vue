@@ -92,6 +92,7 @@
 							@click="exit"
 						/>
 						<ToggleMode class="pr-2 lg:mr-8" />
+						<NavMenu class="hidden lg:block mr-8" />
 						<Translate />
 					</div>
 				</nav>
@@ -117,7 +118,7 @@ import { useStore } from 'vuex'
 import { useMessage } from 'naive-ui'
 import { key } from '/@/components/context/'
 import { dropBaseUrl } from '/@/router/_utils'
-import { LeftMenu, FileTable, Profile } from './main-cmp/'
+import { LeftMenu, FileTable, Profile, NavMenu } from './main-cmp/'
 import { PropfileProps, show } from '/@/network/main'
 import { isUsefulReq } from '../network/_utils'
 import { useTypeI18n } from '/@/i18n/'
@@ -139,6 +140,7 @@ export default defineComponent({
 		FileTable,
 		LeftMenu,
 		Profile,
+		NavMenu,
 	},
 	setup() {
 		const fullRef = ref<HTMLDivElement | null>(null)!
