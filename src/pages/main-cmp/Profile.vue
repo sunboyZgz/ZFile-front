@@ -28,13 +28,17 @@
 				</span>
 			</div>
 			<nav class="flex flex-col">
-				<button class="nav-items rounded-md pl-2 py-2 shadow-md flex items-center" @click="signOut">
+				<NavMenu />
+				<button
+					class="can-active nav-items rounded-md mt-2 pl-2 py-2 shadow-md flex items-center"
+					@click="signOut"
+				>
 					<AliIcon
 						class="icon dark:text-true-gray-200 !text-xl"
 						code="exit"
 						:title="t('tablle.leftnav.sign-out')"
 					/>
-					<span class="ml-2">退出</span>
+					<span class="ml-2">{{ t('navMenu.exit') }}</span>
 				</button>
 			</nav>
 		</n-drawer-content>
@@ -47,11 +51,13 @@ import { MenuIcon, AliIcon } from '/@/components/'
 import type { PropfileProps } from '/@/network/main'
 import { useTypeI18n } from '/@/i18n/index'
 import { useSignout } from './_utils'
+import NavMenu from './NavMenu.vue'
 export default defineComponent({
 	name: 'Profile',
 	components: {
 		MenuIcon,
 		AliIcon,
+		NavMenu,
 	},
 	props: {
 		userInfo: {
@@ -78,6 +84,6 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './index.scss';
 </style>

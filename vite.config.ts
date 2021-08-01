@@ -35,7 +35,6 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
 		base: VITE_PUBLIC_PATH,
 		root: ROOT,
 		server: {
-			open: '/zfile/index.html',
 			port: VITE_PORT,
 			proxy: isBuild
 				? undefined
@@ -46,6 +45,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
 							rewrite: path => path.replace(/^\/api/, ''),
 						},
 				  },
+			host: '0.0.0.0',
 		},
 		css: {
 			preprocessorOptions: {

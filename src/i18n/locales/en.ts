@@ -16,7 +16,9 @@ const en: I18Message = {
 		comfirm: 'register',
 	},
 	navMenu: {
+		title: 'Other page',
 		system: 'System',
+		exit: 'Exit',
 	},
 	login: 'Login',
 	account: {

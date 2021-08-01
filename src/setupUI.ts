@@ -21,6 +21,8 @@ import {
 	NDrawer,
 	NDrawerContent,
 	NCheckbox,
+	NCollapse,
+	NCollapseItem,
 } from 'naive-ui'
 //dark mode
 import {
@@ -36,6 +38,7 @@ import {
 	spinDark,
 	drawerDark,
 	checkboxDark,
+	collapseDark,
 } from 'naive-ui'
 import 'vfonts/FiraCode.css'
 import type { GlobalThemeOverrides } from 'naive-ui'
@@ -59,6 +62,8 @@ export function setupUI(app: App): void {
 			NDrawer,
 			NDrawerContent,
 			NCheckbox,
+			NCollapse,
+			NCollapseItem,
 		],
 	})
 	app.use(naive)
@@ -79,6 +84,7 @@ export const darkTheme = createTheme([
 	spinDark,
 	drawerDark,
 	checkboxDark,
+	collapseDark,
 ])
 
 //themeColor change

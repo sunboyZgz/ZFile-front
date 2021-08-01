@@ -15,7 +15,9 @@ const zh = {
 		comfirm: '注册',
 	},
 	navMenu: {
+		title: '其他页面',
 		system: '系统',
+		exit: '退出',
 	},
 	login: '登录',
 	account: {

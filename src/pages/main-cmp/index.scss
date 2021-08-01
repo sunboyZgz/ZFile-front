@@ -13,9 +13,9 @@ profile component style
 .dark .nav-items {
 	background-color: rgba(229, 229, 229, 0.2);
 }
-.nav-items:active {
+.can-active.nav-items:active {
 	background-color: rgba(83, 77, 184, 0.8);
 }
-.dark .nav-items:active {
+.dark .can-active.nav-items:active {
 	background-color: rgb(83, 77, 184);
 }
