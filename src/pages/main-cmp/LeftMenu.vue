@@ -25,15 +25,25 @@
 					/>
 				</div>
 			</MenuItem>
+			<MenuItem>
+				<div class="nav-btn">
+					<AliIcon
+						class="icon dark:text-true-gray-200 !text-xl"
+						code="exit"
+						:title="t('tablle.leftnav.sign-out')"
+						@click="showModal"
+					/>
+				</div>
+			</MenuItem>
 		</Menu>
 	</div>
+	<ProgressBox v-model:active="active" :active-change="activeChange" />
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, toRef, computed, ComputedRef } from 'vue'
+import { defineComponent, PropType, toRef, computed, ComputedRef, ref } from 'vue'
 import { Menu, MenuItem, AliIcon } from '/@/components/'
-import FolderAdd from './FolderAdd.vue'
-import FileAdd from './FileAdd.vue'
+import { FolderAdd, FileAdd, ProgressBox } from './'
 import { MenuMode } from '/@/components/easy-menu/_utils'
 import { useFullscreen } from '@vueuse/core'
 import type { NavItem } from '../Main.vue'
@@ -49,6 +59,7 @@ export default defineComponent({
 		AliIcon,
 		FolderAdd,
 		FileAdd,
+		ProgressBox,
 	},
 	props: {
 		dom: {
@@ -58,6 +69,7 @@ export default defineComponent({
 	},
 	setup(props) {
 		const dom = toRef(props, 'dom')
+		const active = ref(true)
 		const { isFullscreen, enter } = useFullscreen(dom)
 		const { t } = useTypeI18n()
 		const navItems: ComputedRef<(NavItem & { click?: (e: MouseEvent) => void })[]> = computed(
@@ -84,12 +96,21 @@ export default defineComponent({
 			}
 		)
 		const toSignOut = useSignout()
+		const activeChange = isShow => {
+			active.value = isShow
+		}
+		const showModal = () => {
+			active.value = true
+		}
 		return {
 			MenuMode,
 			navItems,
 			github,
 			toSignOut,
 			t,
+			active,
+			activeChange,
+			showModal,
 		}
 	},
 })

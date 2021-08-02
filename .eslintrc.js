@@ -51,5 +51,6 @@ module.exports = {
 		],
 		'vue/html-closing-bracket-newline': 'off',
 		'vue/multiline-html-element-content-newline': 'off',
+		'vue/no-mutating-props': 'off',
 	},
 }

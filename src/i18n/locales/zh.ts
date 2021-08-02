@@ -50,6 +50,9 @@ const zh = {
 			fullScreen: '全屏',
 		},
 	},
+	progress_box: {
+		downpanel: '下载面板',
+	},
 }
 
 export default zh

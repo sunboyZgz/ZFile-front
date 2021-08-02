@@ -51,5 +51,8 @@ const en: I18Message = {
 			fullScreen: 'full screen',
 		},
 	},
+	progress_box: {
+		downpanel: 'download panel',
+	},
 }
 export default en
