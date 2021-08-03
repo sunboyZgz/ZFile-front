@@ -20,24 +20,17 @@
 					<AliIcon
 						class="icon dark:text-true-gray-200 !text-xl"
 						code="exit"
-						:title="t('tablle.leftnav.sign-out')"
+						:title="t('table.leftnav.sign-out')"
 						@click="toSignOut"
-					/>
-				</div>
-			</MenuItem>
-			<MenuItem>
-				<div class="nav-btn">
-					<AliIcon
-						class="icon dark:text-true-gray-200 !text-xl"
-						code="exit"
-						:title="t('tablle.leftnav.sign-out')"
-						@click="showModal"
 					/>
 				</div>
 			</MenuItem>
 		</Menu>
 	</div>
 	<ProgressBox v-model:active="active" :active-change="activeChange" />
+	<n-button v-if="!active" class="fixed z-2 right-8 bottom-2 shadow-md" @click="showPanel">{{
+		t('progress_box.button')
+	}}</n-button>
 </template>
 
 <script lang="ts">
@@ -69,12 +62,12 @@ export default defineComponent({
 	},
 	setup(props) {
 		const dom = toRef(props, 'dom')
-		const active = ref(true)
+		const active = ref(false)
 		const { isFullscreen, enter } = useFullscreen(dom)
 		const { t } = useTypeI18n()
 		const navItems: ComputedRef<(NavItem & { click?: (e: MouseEvent) => void })[]> = computed(
 			() => {
-				const fullscreen = t('tablle.leftnav.fullScreen')
+				const fullscreen = t('table.leftnav.fullScreen')
 				// const download = t('tablle.leftnav.download')
 				return [
 					{
@@ -99,7 +92,7 @@ export default defineComponent({
 		const activeChange = isShow => {
 			active.value = isShow
 		}
-		const showModal = () => {
+		const showPanel = () => {
 			active.value = true
 		}
 		return {
@@ -110,7 +103,7 @@ export default defineComponent({
 			t,
 			active,
 			activeChange,
-			showModal,
+			showPanel,
 		}
 	},
 })

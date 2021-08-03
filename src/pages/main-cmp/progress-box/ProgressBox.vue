@@ -7,23 +7,31 @@
 		width="100%"
 		to="#progress-box"
 		:on-update:show="activeChange"
+		class="rounded-md"
 	>
 		<n-drawer-content :title="t('progress_box.downpanel')" :closable="true">
-			即将开始重新设计下载的进度显示
+			<ProgressItem />
 		</n-drawer-content>
 	</n-drawer>
 	<!-- </teleport> -->
 </template>
 
 <script lang="ts">
-import { defineComponent, onUnmounted, inject } from 'vue'
+import { defineComponent, inject } from 'vue'
 import { key } from '/@/components/context/'
 import { toBody } from '/@/components/utils'
 import { useTypeI18n } from '/@/i18n'
+import ProgressItem from './ProgressItem.vue'
 const id = 'progress-box'
-toBody(document.createElement('div'), id)
+const removeDom = () => {
+	const dom = document.getElementById(id)
+	dom && document.body.removeChild(dom)
+}
 export default defineComponent({
 	name: 'ProgressBox',
+	components: {
+		ProgressItem,
+	},
 	props: {
 		active: {
 			type: Boolean,
@@ -38,13 +46,32 @@ export default defineComponent({
 	setup() {
 		const smallScreen = inject(key)?.smallScreen
 		const { t } = useTypeI18n()
-		onUnmounted(() => {
-			document.body.removeChild(document.getElementById(id)!)
-		})
 		return {
 			smallScreen,
 			t,
 		}
+	},
+	watch: {
+		active(newValue) {
+			const dom = document.getElementById(id)
+			if (dom) {
+				if (newValue) {
+					dom.style.display = 'block'
+				} else {
+					let timer: any = setTimeout(() => {
+						dom.style.display = 'none'
+						clearTimeout(timer)
+						timer = null
+					}, 300)
+				}
+			}
+		},
+	},
+	unmounted() {
+		removeDom()
+	},
+	beforeMount() {
+		toBody(document.createElement('div'), id, { display: this.active ? 'block' : 'none' })
 	},
 })
 </script>

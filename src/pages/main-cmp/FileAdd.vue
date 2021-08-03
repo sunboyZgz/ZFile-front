@@ -4,7 +4,7 @@
 			class="absolute z-1 block w-full h-full cursor-pointer overflow-hidden indent-3xl"
 			type="file"
 			:multiple="true"
-			:title="t('tablle.leftnav.file-add')"
+			:title="t('table.leftnav.file-add')"
 			ref="fileAddRef"
 			@change="uploadFiles"
 		/>

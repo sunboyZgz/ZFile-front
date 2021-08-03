@@ -1,0 +1,11 @@
+/*progress-box*/
+#progress-box {
+	position: fixed;
+	width: 35rem;
+	height: 25rem;
+	bottom: 0;
+	right: 2rem;
+}
+#progress-box .n-drawer-mask {
+	display: none;
+}

@@ -7,4 +7,4 @@ export { default as FolderAdd } from './FolderAdd.vue'
 export const LeftMenu = createAsyncComponent(() => import('./LeftMenu.vue'))
 export const Profile = createAsyncComponent(() => import('./Profile.vue'))
 export const NavMenu = createAsyncComponent(() => import('./NavMenu.vue'))
-export { default as ProgressBox } from './ProgressBox.vue'
+export { default as ProgressBox } from './progress-box'

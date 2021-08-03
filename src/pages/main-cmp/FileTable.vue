@@ -86,13 +86,13 @@
 			@click="hideClick"
 		>
 			<div class="head-name pl-12 hover:bg-blue-50 dark:hover:bg-blue-gray-600">
-				{{ t('tablle.header.name') }}
+				{{ t('table.header.name') }}
 			</div>
 			<div class="head-time hidden lg:block indent-sm hover:bg-blue-50 dark:hover:bg-blue-gray-600">
-				{{ t('tablle.header.time') }}
+				{{ t('table.header.time') }}
 			</div>
 			<div class="head-size indent-sm hover:bg-blue-50 dark:hover:bg-blue-gray-600">
-				{{ t('tablle.header.size') }}
+				{{ t('table.header.size') }}
 			</div>
 		</div>
 		<div class="file-table-items h-full overflow-scroll overflow-x-hidden sun-scroll">

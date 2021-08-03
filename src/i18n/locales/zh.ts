@@ -36,7 +36,7 @@ const zh = {
 		nickname: '昵称',
 		email: '邮箱',
 	},
-	tablle: {
+	table: {
 		header: {
 			name: '文件名',
 			time: '时间',
@@ -52,6 +52,7 @@ const zh = {
 	},
 	progress_box: {
 		downpanel: '下载面板',
+		button: '进度栏',
 	},
 }
 

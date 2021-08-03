@@ -36,7 +36,7 @@
 					<AliIcon
 						class="icon dark:text-true-gray-200 !text-xl"
 						code="exit"
-						:title="t('tablle.leftnav.sign-out')"
+						:title="t('table.leftnav.sign-out')"
 					/>
 					<span class="ml-2">{{ t('navMenu.exit') }}</span>
 				</button>

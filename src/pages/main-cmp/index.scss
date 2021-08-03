@@ -19,14 +19,3 @@ profile component style
 .dark .can-active.nav-items:active {
 	background-color: rgb(83, 77, 184);
 }
-/*progress-box*/
-#progress-box {
-	position: fixed;
-	width: 35rem;
-	height: 25rem;
-	bottom: 0;
-	right: 2rem;
-}
-#progress-box .n-drawer-mask {
-	background-color: transparent;
-}

@@ -74,7 +74,11 @@ export const easySmooth = (vnodes: any[]) => {
 /**
  * @description to support teleport built-in component
  */
-export const toBody = (dom: HTMLElement, id: string) => {
+export const toBody = (dom: HTMLElement, id: string, style?: Partial<CSSStyleDeclaration>) => {
 	dom.id = id
+	style &&
+		Object.keys(style).forEach(key => {
+			dom.style[key] = style[key]
+		})
 	document.body.appendChild(dom)
 }

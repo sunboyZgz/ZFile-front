@@ -15,7 +15,7 @@
 			"
 			type="file"
 			:multiple="true"
-			:title="t('tablle.leftnav.folder-add')"
+			:title="t('table.leftnav.folder-add')"
 			webkitdirectory
 			ref="folderAddRef"
 			@change="uploadFolder"

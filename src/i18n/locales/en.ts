@@ -37,7 +37,7 @@ const en: I18Message = {
 		nickname: 'nickname',
 		email: 'email',
 	},
-	tablle: {
+	table: {
 		header: {
 			name: 'name',
 			time: 'time',
@@ -53,6 +53,7 @@ const en: I18Message = {
 	},
 	progress_box: {
 		downpanel: 'download panel',
+		button: 'panel',
 	},
 }
 export default en
