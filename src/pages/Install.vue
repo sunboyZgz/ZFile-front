@@ -4,8 +4,7 @@
 		class="min-w-screen min-h-screen overflow-hidden dark:bg-blue-gray-900 relative"
 	>
 		<!-- large size screen -->
-		<div class="hidden lg:flex absolute top-4 right-0 pr-4 w-70 justify-evenly z-50">
-			<ToggleMode />
+		<PCTopNav v-if="!smallScreen">
 			<a :href="github" target="_blank">
 				<GithubIcon
 					class="
@@ -20,9 +19,8 @@
 					width="28"
 				/>
 			</a>
-			<Translate />
-		</div>
-		<div class="flow-root pt-2 px-3 mb-12">
+		</PCTopNav>
+		<div class="flow-root lg:hidden flow-root pt-2 px-3 mb-12">
 			<div class="float-left">
 				<ToggleMode />
 			</div>
@@ -207,17 +205,17 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, reactive, ref } from 'vue'
+import { computed, defineComponent, reactive, ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { useMessage } from 'naive-ui'
 import Measure from '/@/components/measure/index.vue'
-import { key } from '/@/components/context/'
 import { throttle, debounce } from '/@/utils/common'
 import { getVeriCode, registerUser } from '/@/network/install'
 import { isUsefulReq } from '/@/network/_utils'
-import { Translate, ToggleMode, GithubIcon } from '/@/components/'
+import { GithubIcon, PCTopNav, Translate, ToggleMode } from '/@/components/'
 import { useTypeI18n } from '/@/i18n'
+import { useSmallSize } from '/@/hooks/index'
 const github = import.meta.env.VITE_GITHUB
 const emailReg = /^[0-9a-zA-Z]+[\w._-|]+@[0-9a-zA-Z]+\.[a-z]{2,}$/
 
@@ -230,12 +228,13 @@ export default defineComponent({
 	name: 'Install',
 	components: {
 		Measure,
+		PCTopNav,
+		GithubIcon,
 		Translate,
 		ToggleMode,
-		GithubIcon,
 	},
 	setup() {
-		const smallScreen = inject(key)?.smallScreen
+		const smallScreen = useSmallSize()
 		const store = useStore()
 		const router = useRouter()
 		const isDark = computed(() => store.getters['themeModule/getDark'])

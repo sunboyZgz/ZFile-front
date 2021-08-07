@@ -31,6 +31,7 @@ export function useContext<T>(key: InjectionKey<T>, defaultValue?: T): T | {} {
 export function useSmallSize() {
 	const isSmall = ref(false)
 	const screenSize = inject(contextKey)
+	//do watcheffect to resolve some problem with side effect
 	watchEffect(() => {
 		isSmall.value = unref(false || screenSize!.smallScreen)
 	})

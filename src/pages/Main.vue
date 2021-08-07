@@ -76,25 +76,26 @@
 						</Breadcrumb>
 					</div>
 					<!-- top-right control button -->
-					<div class="flex-1 text-right flex justify-end items-center pr-2 lg:pr-8">
-						<AliIcon
-							v-if="isFullscreen"
-							code="xiaoping"
-							class="
-								dark:text-white
-								mr-8
-								!text-2xl
-								cursor-pointer
-								transition-transform
-								transform-gpu
-								hover:scale-110
-							"
-							@click="exit"
-						/>
-						<ToggleMode class="pr-2 lg:mr-8" />
-						<NavMenu class="hidden lg:block mr-8" />
-						<Translate />
-					</div>
+					<PCTopNav class="!w-40 !lg:w-70 mt-1">
+						<template #append>
+							<AliIcon
+								v-if="isFullscreen"
+								code="xiaoping"
+								class="
+									dark:text-white
+									!text-2xl
+									cursor-pointer
+									transition-transform
+									transform-gpu
+									hover:scale-110
+								"
+								@click="exit"
+							/>
+						</template>
+						<template #default>
+							<NavMenu class="hidden lg:block" />
+						</template>
+					</PCTopNav>
 				</nav>
 				<div class="file-main w-full pb-2 pl-0 lg:pl-6">
 					<div class="file-body w-full h-full rounded-0 lg:rounded-tl-3xl overflow-hidden">
@@ -116,18 +117,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref, watch, unref, computed, inject } from 'vue'
-import { AliIcon, Translate, ToggleMode, Breadcrumb, BreadItem, NavMenu } from '/@/components/'
+import { defineComponent, Ref, ref, watch, unref, computed } from 'vue'
+import { AliIcon, Breadcrumb, BreadItem, NavMenu, PCTopNav } from '/@/components/'
 import { useFullscreen } from '@vueuse/core'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { useMessage } from 'naive-ui'
-import { key } from '/@/components/context/'
 import { dropBaseUrl } from '/@/router/_utils'
 import { LeftMenu, FileTable, Profile, ProgressBox } from './main-cmp/'
 import { PropfileProps, show } from '/@/network/main'
 import { isUsefulReq } from '../network/_utils'
 import { useTypeI18n } from '/@/i18n/'
+import { useSmallSize } from '/@/hooks/index'
 export interface NavItem {
 	code?: string
 	activeCode?: string
@@ -139,15 +140,14 @@ export default defineComponent({
 	name: 'Main',
 	components: {
 		AliIcon,
-		Translate,
 		BreadItem,
 		Breadcrumb,
-		ToggleMode,
 		FileTable,
 		LeftMenu,
 		Profile,
 		NavMenu,
 		ProgressBox,
+		PCTopNav,
 	},
 	setup() {
 		const fullRef = ref<HTMLDivElement | null>(null)!
@@ -161,7 +161,7 @@ export default defineComponent({
 		const pathRef = ref<string[]>([])
 		const fileList = computed(() => store.getters['fileSys/curDirGetter'])
 		const message = useMessage()
-		const smallScreen = computed(() => inject(key)?.smallScreen)
+		const smallScreen = useSmallSize()
 		show().then(res => {
 			if (isUsefulReq(res.status)) {
 				userInfo.value = res.message

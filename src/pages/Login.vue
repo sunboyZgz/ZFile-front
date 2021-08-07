@@ -14,9 +14,7 @@
 		:class="{ 'login--color': isSmall }"
 	>
 		<!--  big screen nav -->
-		<div class="hidden lg:flex absolute top-4 right-0 pr-4 w-70 justify-evenly">
-			<ToggleMode />
-
+		<PCTopNav v-if="!isSmall">
 			<a :href="github" target="_blank">
 				<GithubIcon
 					class="
@@ -31,8 +29,7 @@
 					width="28"
 				/>
 			</a>
-			<Translate />
-		</div>
+		</PCTopNav>
 		<!-- small screen nav -->
 		<div class="block lg:hidden w-full">
 			<div class="flow-root pt-2 px-3 mb-12">
@@ -135,7 +132,7 @@
 import { defineComponent } from 'vue'
 import { useTypeI18n, useI18Select, options } from '/@/i18n/'
 import Form from './login-cmp/Form.vue'
-import { ToggleMode, Translate, GithubIcon, PrintSvg } from '/@/components/'
+import { GithubIcon, PrintSvg, PCTopNav, Translate, ToggleMode } from '/@/components/'
 import { useSmallSize } from '/@/hooks/index'
 const github = import.meta.env.VITE_GITHUB
 
@@ -145,6 +142,7 @@ export default defineComponent({
 		GithubIcon,
 		PrintSvg,
 		Form,
+		PCTopNav,
 		Translate,
 		ToggleMode,
 	},

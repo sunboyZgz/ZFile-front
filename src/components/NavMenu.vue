@@ -29,12 +29,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, h } from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { useRouter, RouteRecordRaw } from 'vue-router'
 import { useTypeI18n } from '/@/i18n'
 import { NavIcon } from '/@/components/'
-import { key } from '/@/components/context/'
 import { canNavigateRoutes } from '/@/router/routes/base'
+import { useSmallSize } from '../hooks'
 // enum dropDropKeys {
 // 	SYSTEM = '1',
 // }
@@ -48,7 +48,7 @@ export default defineComponent({
 	setup() {
 		const router = useRouter()
 		const { t } = useTypeI18n()
-		const smallScreen = inject(key)?.smallScreen
+		const smallScreen = useSmallSize()
 		const options = computed(() => {
 			const routes = canNavigateRoutes.filter(route => {
 				const path = router.currentRoute.value.path
