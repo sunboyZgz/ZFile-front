@@ -27,16 +27,13 @@
 			</MenuItem>
 		</Menu>
 	</div>
-	<ProgressBox v-model:active="active" :active-change="activeChange" />
-	<n-button v-if="!active" class="fixed z-2 right-8 bottom-2 shadow-md" @click="showPanel">{{
-		t('progress_box.button')
-	}}</n-button>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, toRef, computed, ComputedRef, ref } from 'vue'
+import { defineComponent, PropType, toRef, computed, ComputedRef, ref, inject } from 'vue'
 import { Menu, MenuItem, AliIcon } from '/@/components/'
-import { FolderAdd, FileAdd, ProgressBox } from './'
+import { key } from '/@/components/context'
+import { FolderAdd, FileAdd } from './'
 import { MenuMode } from '/@/components/easy-menu/_utils'
 import { useFullscreen } from '@vueuse/core'
 import type { NavItem } from '../Main.vue'
@@ -52,7 +49,6 @@ export default defineComponent({
 		AliIcon,
 		FolderAdd,
 		FileAdd,
-		ProgressBox,
 	},
 	props: {
 		dom: {
@@ -65,6 +61,7 @@ export default defineComponent({
 		const active = ref(false)
 		const { isFullscreen, enter } = useFullscreen(dom)
 		const { t } = useTypeI18n()
+		const smallScreen = inject(key)?.smallScreen
 		const navItems: ComputedRef<(NavItem & { click?: (e: MouseEvent) => void })[]> = computed(
 			() => {
 				const fullscreen = t('table.leftnav.fullScreen')
@@ -104,6 +101,7 @@ export default defineComponent({
 			active,
 			activeChange,
 			showPanel,
+			smallScreen,
 		}
 	},
 })

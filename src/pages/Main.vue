@@ -105,6 +105,12 @@
 					</div>
 				</div>
 			</div>
+			<template v-if="!smallScreen">
+				<ProgressBox v-model:active="active" :active-change="activeChange" />
+				<n-button v-if="!active" class="fixed z-2 right-8 bottom-2 shadow-md" @click="showPanel">{{
+					t('progress_box.button')
+				}}</n-button>
+			</template>
 		</n-notification-provider>
 	</div>
 </template>
@@ -118,7 +124,7 @@ import { useStore } from 'vuex'
 import { useMessage } from 'naive-ui'
 import { key } from '/@/components/context/'
 import { dropBaseUrl } from '/@/router/_utils'
-import { LeftMenu, FileTable, Profile } from './main-cmp/'
+import { LeftMenu, FileTable, Profile, ProgressBox } from './main-cmp/'
 import { PropfileProps, show } from '/@/network/main'
 import { isUsefulReq } from '../network/_utils'
 import { useTypeI18n } from '/@/i18n/'
@@ -141,10 +147,12 @@ export default defineComponent({
 		LeftMenu,
 		Profile,
 		NavMenu,
+		ProgressBox,
 	},
 	setup() {
 		const fullRef = ref<HTMLDivElement | null>(null)!
 		const showModal = ref(false)
+		const active = ref(false)
 		const userInfo = ref<null | PropfileProps>(null)
 		const router = useRouter()
 		const store = useStore()
@@ -205,7 +213,12 @@ export default defineComponent({
 				click: push,
 			},
 		]
-
+		const activeChange = isShow => {
+			active.value = isShow
+		}
+		const showPanel = () => {
+			active.value = true
+		}
 		return {
 			fullRef,
 			isFullscreen,
@@ -218,6 +231,10 @@ export default defineComponent({
 			showModal,
 			smallScreen,
 			userInfo,
+			active,
+			t,
+			activeChange,
+			showPanel,
 		}
 	},
 })
