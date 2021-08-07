@@ -10,3 +10,4 @@ export const Translate = createAsyncComponent(() => import('./Translate.vue'))
 export { Breadcrumb, BreadItem } from './breadcrumb'
 export { default as Editor } from './editor'
 export { default as Preview } from './preview'
+export const NavMenu = createAsyncComponent(() => import('./NavMenu.vue'))

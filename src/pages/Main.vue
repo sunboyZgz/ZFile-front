@@ -111,14 +111,14 @@
 
 <script lang="ts">
 import { defineComponent, Ref, ref, watch, unref, computed, inject } from 'vue'
-import { AliIcon, Translate, ToggleMode, Breadcrumb, BreadItem } from '/@/components/'
+import { AliIcon, Translate, ToggleMode, Breadcrumb, BreadItem, NavMenu } from '/@/components/'
 import { useFullscreen } from '@vueuse/core'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { useMessage } from 'naive-ui'
 import { key } from '/@/components/context/'
 import { dropBaseUrl } from '/@/router/_utils'
-import { LeftMenu, FileTable, Profile, NavMenu } from './main-cmp/'
+import { LeftMenu, FileTable, Profile } from './main-cmp/'
 import { PropfileProps, show } from '/@/network/main'
 import { isUsefulReq } from '../network/_utils'
 import { useTypeI18n } from '/@/i18n/'

@@ -1160,10 +1160,10 @@ cross-spawn@^7.0.0, cross-spawn@^7.0.1, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-css-render@^0.15.2:
-  version "0.15.2"
-  resolved "https://registry.npmjs.org/css-render/-/css-render-0.15.2.tgz#452e781a40bc8a97848adb970ed25f49b38a8716"
-  integrity sha512-H4b8mrgjvHl46t/A4FRD4m2O8BELULBrbeSc9Uc7o9J5KROJ4qIMnJdgo3RlOLXzrQt0ILAYWBTFvNzD1gN2HA==
+css-render@^0.15.3:
+  version "0.15.5"
+  resolved "https://registry.npmjs.org/css-render/-/css-render-0.15.5.tgz#e4c03b70307f31ca90133ad047419e69121bf096"
+  integrity sha512-i33v56jCiq+TPmYbwCA0N9VKWVy+BjPBuBJg1FKdCcrZDLGZrEc5vDfedHrWwFA0J9MCiPtz1HLAGl7R1LLQBg==
   dependencies:
     "@emotion/hash" "~0.8.0"
     "@types/node" "~14.14.31"
@@ -2201,10 +2201,10 @@ multimatch@^4.0.0:
     arrify "^2.0.1"
     minimatch "^3.0.4"
 
-naive-ui@^2.15.1:
-  version "2.15.1"
-  resolved "https://registry.npmjs.org/naive-ui/-/naive-ui-2.15.1.tgz#1bf5cb40325f47d9055dba2cf3526586625bf332"
-  integrity sha512-UgUw9CvA5HYnMjwEoyycZind7lRlPFSuOPennCxXwejGppip4WAtQYiY72SLK8Ui8O2xJy4lZRtbD7sEo0YKFg==
+naive-ui@^2.16.1:
+  version "2.16.1"
+  resolved "https://registry.npmjs.org/naive-ui/-/naive-ui-2.16.1.tgz#0599e6748f498ad8f4f2f4c6c0637c1f1d860827"
+  integrity sha512-ku7ZxxBMp2fHD2eKV1gUDO6LmvMPUKYx0JzgtiCHRC8B88t4Ch5Momf+CfuYIM5NeVexzcmlahadslB74Bgbfw==
   dependencies:
     "@css-render/plugin-bem" "^0.15.4"
     "@css-render/vue3-ssr" "^0.15.4"
@@ -2218,11 +2218,11 @@ naive-ui@^2.15.1:
     lodash "^4.17.21"
     lodash-es "^4.17.21"
     seemly "^0.3.1"
-    treemate "^0.2.11"
+    treemate "^0.2.12"
     vdirs "^0.1.4"
     vfonts "^0.1.0"
     vooks "^0.2.6"
-    vueuc "^0.4.7"
+    vueuc "^0.4.9"
 
 nanoid@^3.1.23:
   version "3.1.23"
@@ -2879,10 +2879,10 @@ to-regex-range@^5.0.1:
   resolved "https://registry.npmjs.org/traverse/-/traverse-0.3.9.tgz#717b8f220cc0bb7b44e40514c22b2e8bbc70d8b9"
   integrity sha1-cXuPIgzAu3tE5AUUwisui7xw2Lk=
 
-treemate@^0.2.11:
-  version "0.2.11"
-  resolved "https://registry.npmjs.org/treemate/-/treemate-0.2.11.tgz#cffa37051e613beaa82fd3fce56300e8e4d8328f"
-  integrity sha512-3/wjLLBbLYKZUI311pERMnM/yLHCInD3lfETWTeoHDNwnZI2ApVqgVCJnjEWC10Ugd02ASKlBHJeKSDUmLYWng==
+treemate@^0.2.12:
+  version "0.2.12"
+  resolved "https://registry.npmjs.org/treemate/-/treemate-0.2.12.tgz#eed8ce0cd5a03f11c090c43d08f548694eead4b5"
+  integrity sha512-li5ZxaT7BtBIEnT7eUO3mk4BdefANPUKjCGnTciFp5e5UDy3+07HLvWelKxuIz1jCz+6r5IPoP8P/5+8Xz9Z7w==
 
 tslib@^1.8.1, tslib@^1.9.0:
   version "1.14.1"
@@ -3092,12 +3092,12 @@ vue@^3.0.5:
     "@vue/runtime-dom" "3.1.1"
     "@vue/shared" "3.1.1"
 
-vueuc@^0.4.7:
-  version "0.4.7"
-  resolved "https://registry.npmjs.org/vueuc/-/vueuc-0.4.7.tgz#1797b694f2f58d923702153baf7b3138670394f2"
-  integrity sha512-81qPCR4LcoNL0EKwTRJeBv5oiIdZKW3H3yDnXmWRe1BIZqJx0p84wFMHxrfdV/nuv0N6Qnw4Sjq4Za3zF96DPg==
+vueuc@^0.4.9:
+  version "0.4.9"
+  resolved "https://registry.npmjs.org/vueuc/-/vueuc-0.4.9.tgz#f3fb8ee85ead7d9c08df0d23e7b285c35064e9f2"
+  integrity sha512-IlM2qw1wjsiylGOzjKvuR4C8g7rzQQ4gIa3TxoBlWvs9/mYHZEHDHnq8S6MRrP8AawdQcaOPyFtzttbAR8G+AA==
   dependencies:
-    css-render "^0.15.2"
+    css-render "^0.15.3"
     evtd "^0.2.2"
     resize-observer-polyfill "^1.5.1"
     seemly "^0.3.1"

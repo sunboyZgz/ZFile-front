@@ -43,7 +43,7 @@ export default defineComponent({
 		const { t } = useTypeI18n()
 		const smallScreen = inject(key)?.smallScreen
 		const options = computed(() => {
-			const systemLabel = t('navMenu.system')
+			const systemLabel = t('navMenu.System')
 			return [
 				{
 					label: systemLabel,

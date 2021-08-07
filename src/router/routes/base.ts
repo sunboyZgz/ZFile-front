@@ -15,6 +15,7 @@ const LoginRoute: RouteRecordRaw = {
 	component: () => import('/@/pages/Login.vue'),
 	meta: {
 		title: 'loginpage',
+		key: 1,
 	},
 }
 
@@ -33,6 +34,7 @@ const MainRoute: RouteRecordRaw = {
 	component: () => import('/@/pages/Main.vue'),
 	meta: {
 		title: 'mainpage',
+		key: 2,
 	},
 }
 
@@ -42,13 +44,10 @@ const SystemRoute: RouteRecordRaw = {
 	component: () => import('/@/pages/System.vue'),
 	meta: {
 		title: 'systempage',
+		key: 3,
 	},
 }
 
-export const baseRoutes = [
-	RedirectRoute,
-	LoginRoute,
-	InstallRoute,
-	MainRoute,
-	SystemRoute,
-] as RouteRecordRaw[]
+export const baseRoutes = [RedirectRoute, InstallRoute] as RouteRecordRaw[]
+
+export const canNavigateRoutes = [LoginRoute, MainRoute, SystemRoute]

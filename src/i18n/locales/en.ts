@@ -17,8 +17,10 @@ const en: I18Message = {
 	},
 	navMenu: {
 		title: 'Other page',
-		system: 'System',
 		exit: 'Exit',
+		Main: 'Main',
+		Login: 'Login',
+		System: 'System',
 	},
 	login: 'Login',
 	account: {

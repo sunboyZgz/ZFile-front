@@ -192,7 +192,7 @@ export default defineComponent({
 				...(attrs.style as object),
 			}
 		})
-		const save = cmInstance => {
+		const save = () => {
 			onsave && onsave()
 		}
 		onMounted(async () => {

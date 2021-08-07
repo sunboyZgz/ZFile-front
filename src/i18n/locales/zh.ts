@@ -16,8 +16,10 @@ const zh = {
 	},
 	navMenu: {
 		title: '其他页面',
-		system: '系统',
 		exit: '退出',
+		Main: '主页',
+		Login: '登录',
+		System: '系统',
 	},
 	login: '登录',
 	account: {

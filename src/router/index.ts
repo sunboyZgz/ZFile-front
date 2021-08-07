@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { baseRoutes } from './routes/base'
+import { baseRoutes, canNavigateRoutes } from './routes/base'
 import { initialUser } from '/@/network/install'
 import { isLogin } from '/@/network/base'
 import { makeEndofSlash } from './_utils'
-const routes = baseRoutes
+const routes = baseRoutes.concat(canNavigateRoutes)
 const router = createRouter({
 	history: createWebHistory('/zfile'),
 	routes,
