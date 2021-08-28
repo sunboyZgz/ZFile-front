@@ -219,7 +219,7 @@ import { useSmallSize } from '/@/hooks/index'
 const github = import.meta.env.VITE_GITHUB
 const emailReg = /^[0-9a-zA-Z]+[\w._-|]+@[0-9a-zA-Z]+\.[a-z]{2,}$/
 
-const pass_level1 = /^.*(?=.{8,16})(?=.*\d)(?=.*[a-z]).*$/
+const pass_level1 = /^.*(?=.{8,16})(?=.*\d)(?=.*[a-z0-9]).*$/
 const pass_level2 = /^.*(?=.{8,16})(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).*$/
 const pass_level3 = /^.*(?=.{8,16})(?=.*\d)(?=.*[a-zA-Z])(?=.*[.!@#$%]).*$/
 const pass_level4 = /^.*(?=.{8,16})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[.!@#$%]).*$/

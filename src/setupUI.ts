@@ -23,6 +23,7 @@ import {
 	NCheckbox,
 	NCollapse,
 	NCollapseItem,
+	NProgress,
 } from 'naive-ui'
 //dark mode
 import {
@@ -64,6 +65,7 @@ export function setupUI(app: App): void {
 			NCheckbox,
 			NCollapse,
 			NCollapseItem,
+			NProgress,
 		],
 	})
 	app.use(naive)

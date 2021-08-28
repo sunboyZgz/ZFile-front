@@ -821,10 +821,10 @@ astral-regex@^2.0.0:
   resolved "https://registry.npmjs.org/astral-regex/-/astral-regex-2.0.0.tgz#483143c567aeed4785759c0865786dc77d7d2e31"
   integrity sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==
 
-async-validator@^3.5.1:
-  version "3.5.2"
-  resolved "https://registry.npmjs.org/async-validator/-/async-validator-3.5.2.tgz#68e866a96824e8b2694ff7a831c1a25c44d5e500"
-  integrity sha512-8eLCg00W9pIRZSB781UUX/H6Oskmm8xloZfr09lz5bikRpBVDlJ3hRVuxxP1SxcwsEYfJ4IU8Q19Y8/893r3rQ==
+async-validator@^4.0.1:
+  version "4.0.2"
+  resolved "https://registry.npmjs.org/async-validator/-/async-validator-4.0.2.tgz#f8089628ff8a95f7c8c58e1b8d3c3cd9de186996"
+  integrity sha512-wPFnOgf9uIu/7uvptlX7PepSf2ArGt60Wng0bYrQ08eZVFG65LRLQpHKQebWEyAYtJcdPN31kndy4nS0jVnf0Q==
 
 async@0.9.x:
   version "0.9.2"
@@ -2201,16 +2201,16 @@ multimatch@^4.0.0:
     arrify "^2.0.1"
     minimatch "^3.0.4"
 
-naive-ui@^2.16.1:
-  version "2.16.1"
-  resolved "https://registry.npmjs.org/naive-ui/-/naive-ui-2.16.1.tgz#0599e6748f498ad8f4f2f4c6c0637c1f1d860827"
-  integrity sha512-ku7ZxxBMp2fHD2eKV1gUDO6LmvMPUKYx0JzgtiCHRC8B88t4Ch5Momf+CfuYIM5NeVexzcmlahadslB74Bgbfw==
+naive-ui@^2.16.7:
+  version "2.16.7"
+  resolved "https://registry.npmjs.org/naive-ui/-/naive-ui-2.16.7.tgz#c6f8e6bc960bc3c270e724aab541dbe7e25fd819"
+  integrity sha512-0l0WX5lJZT9W9kyUke4K8nZsekIXSbfySxA82UPcI/MsaeOXZ5DPRrRGJEgDjK+D8Nw4hD6iex2IAvSvv5Uqog==
   dependencies:
     "@css-render/plugin-bem" "^0.15.4"
     "@css-render/vue3-ssr" "^0.15.4"
     "@types/lodash" "^4.14.170"
     "@types/lodash-es" "^4.17.4"
-    async-validator "^3.5.1"
+    async-validator "^4.0.1"
     css-render "^0.15.4"
     date-fns "^2.19.0"
     evtd "^0.2.2"
@@ -2218,7 +2218,7 @@ naive-ui@^2.16.1:
     lodash "^4.17.21"
     lodash-es "^4.17.21"
     seemly "^0.3.1"
-    treemate "^0.2.12"
+    treemate "^0.3.0"
     vdirs "^0.1.4"
     vfonts "^0.1.0"
     vooks "^0.2.6"
@@ -2879,10 +2879,10 @@ to-regex-range@^5.0.1:
   resolved "https://registry.npmjs.org/traverse/-/traverse-0.3.9.tgz#717b8f220cc0bb7b44e40514c22b2e8bbc70d8b9"
   integrity sha1-cXuPIgzAu3tE5AUUwisui7xw2Lk=
 
-treemate@^0.2.12:
-  version "0.2.12"
-  resolved "https://registry.npmjs.org/treemate/-/treemate-0.2.12.tgz#eed8ce0cd5a03f11c090c43d08f548694eead4b5"
-  integrity sha512-li5ZxaT7BtBIEnT7eUO3mk4BdefANPUKjCGnTciFp5e5UDy3+07HLvWelKxuIz1jCz+6r5IPoP8P/5+8Xz9Z7w==
+treemate@^0.3.0:
+  version "0.3.2"
+  resolved "https://registry.npmjs.org/treemate/-/treemate-0.3.2.tgz#ad4f3072e51aab2801697ec20a467ebe01884070"
+  integrity sha512-vy4x0kVfNHxNh+AmXbvrCklYc6HlPpIgqy2zzCStBnqdlhuHP+PaOfKUS3YyISAPhj4g4KdqmvfYrgQV2SF6Ag==
 
 tslib@^1.8.1, tslib@^1.9.0:
   version "1.14.1"

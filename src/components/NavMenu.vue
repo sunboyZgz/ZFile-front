@@ -38,6 +38,10 @@ import { useSmallSize } from '../hooks'
 // enum dropDropKeys {
 // 	SYSTEM = '1',
 // }
+//
+// interface NavRouteRecordRaw extends RouteRecordRaw {
+
+// }
 type NavRouteRecordRaw = RouteRecordRaw & { label: string; key?: number | string }
 
 export default defineComponent({

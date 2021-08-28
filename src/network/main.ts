@@ -6,6 +6,12 @@ import type { Ref } from 'vue'
 import type { fileDetail } from '/@/store/modules/fileSys'
 import { makeStartOfSlash } from '/@/router/_utils'
 /*----------- left side control ------------- */
+interface uploadRequestInfo {
+	folderRef: string
+	files: FormData
+	rootPath?: string
+}
+//order upload
 export const uploadDir = (
 	folderRef: Ref<any>,
 	files: FormData,
@@ -27,7 +33,22 @@ export const uploadDir = (
 		},
 	})
 }
-
+//new upload
+export const newUploadDir = (data: uploadRequestInfo, fn?: Function) => {
+	return nocancleAxios.post({
+		url: 'file/upload',
+		params: {
+			rootPath: data.rootPath,
+		},
+		data: data.files,
+		headers: {
+			'Content-Type': 'multipart/form-data;charset=UTF-8',
+		},
+		onUploadProgress(progress: ProgressEvent) {
+			fn && fn(progress)
+		},
+	})
+}
 /**
  * @description make a polling to confirm the progress of upload file
  */
